@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600&family=Inter:wght@100;300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700&family=Nunito:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    list-style: none;
+}
+
+body {
+    background-color: #F5F5F5;
+
+    nav {
+        background-color: #272829;
+        padding: 15px 30px;
+        user-select: none;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .logo {
+                font-size: 30px;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                }
+            }
+
+            .nav_links {
+                ul {
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    gap: 32px;
+
+                    li {
+                        padding: 0;
+
+                        a {
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 700;
+                            line-height: 150%;
+                            text-decoration: none;
+                            transition: .2s;
+                            &:hover {
+                                color: #FFD002 !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .lang {
+                position: relative;
+                cursor: pointer;
+
+                .selected_lang {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    span {
+                        color: #FAFAFA;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 150%;
+                    }
+                }
+
+                .lang_options {
+                    position: absolute;
+                    left: -5px;
+                    background-color: white;
+                    border-radius: 4px;
+                    z-index: 1000;
+                    top: 30px;
+                    height: fit-content;
+                    overflow: hidden;
+
+                    .option {
+                        color: rgba(38, 38, 38, 0.80);
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+                        padding: 5px 12px;
+                        background-color: white;
+
+                        &:hover {
+                            background-color: rgba(38, 38, 38, 0.10) !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    main {
+        section {
+            height: 100vh;
+            padding: 100px 0;
+        }
+    }
+}
