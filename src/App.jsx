@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import { languages } from "../constants/lang";
 
 const App = () => {
   const [lang, setLang] = useState(0);
@@ -19,63 +20,7 @@ const App = () => {
       return '#FAFAFA'
     }
   }
-  const languages = [
-    {
-      home: 'Ana Səhifə',
-      about: 'Haqqımızda',
-      service: 'Xidmətlər',
-      faq: 'FAQ',
-      contact: 'Əlaqə',
-      main: 'İşlərinizi bizə əmanət edin',
-      texting: 'Duckweb komandası olaraq rəqəmsal dünyada sizə keyfiyyətli xidmət göstərmək üçün yanınızdayıq. Elə indi sifariş et və verdiyimiz xidmətlərdən yararlan.',
-      buttonlng: 'İndi Sifariş Et',
-      first: 'Veb Saytların Hazırlanması',
-      second: 'Sosial Media Marketinq',
-      third: 'QR Kod Rəqəmsal Menyular',
-      heading1: 'Biz kimik?',
-      heading2: 'Sizi hədəflərinizə çatdırmaq üçün çalışırıq!',
-      heading3: 'Əvvəlcə müştərilərimizi diqqətlə dinləyirik, daha sonra onların tələblərinə uyğun effektli həllər tapmaq üçün araşdırmalar edir və komanda şəklində çalışaraq hədəfə doğru irəliləyirik. İşimizin keyfiyyətli olması və müştərilərimizin məmnuniyyəti isə ilk öncəliklərimizdəndir.'
 
-
-    },
-    {
-      home: 'Home',
-      about: 'About us',
-      service: 'Services',
-      faq: 'FAQ',
-      contact: 'Contact us',
-      main: 'Entrust your work to us',
-      texting: 'As the Duckweb team, we are here to provide you with quality service in the digital world. Order now and take advantage of our services.',
-      buttonlng: 'Order now',
-      first: 'Development of Websites',
-      second: 'Social Media Marketing',
-      third: 'QR Code Digital Menus',
-      heading1: 'Who are we?',
-      heading2: 'We are working to get you to your goals!',
-      heading3: 'First, we carefully listen to our customers, then we conduct research to find effective solutions according to their requirements, and work as a team, we move towards the goal. The quality of our work and the satisfaction of our customers are among our first priorities.'
-
-
-    },
-    {
-      home: 'Плавная',
-      about: 'О нас',
-      service: 'Yслуги',
-      faq: 'Частые вопросы',
-      contact: 'Связаться с нами',
-      main: 'Доверьте свою работу нам',
-      texting: 'Как команда Duckweb, мы здесь, чтобы предоставить вам качественный сервис в цифровом мире. Закажите сейчас и воспользуйтесь нашими услугами.',
-      buttonlng: 'Заказать сейчас',
-      first: 'Разработка веб-сайтов',
-      second: 'Маркетинг в области СМИ',
-      third: 'Цифровые меню с QR-кодом',
-      heading1: 'Кто мы?',
-      heading2: 'Мы работаем для достижения ваших целей!',
-      heading3: 'Сначала мы внимательно слушаем наших клиентов, затем проводим исследования для поиска эффективных решений согласно их требованиям и, работая в команде, движемся к цели. Качество нашей работы и удовлетворенность наших клиентов являются одними из наших главных приоритетов.'
-
-
-    },
-
-  ]
 
   useEffect(() => {
     const aboutTop = aboutSection.current.getBoundingClientRect().top + window.scrollY;
@@ -344,7 +289,235 @@ const App = () => {
             </div>
           </div>
         </section>
-        <section ref={serviceSection} id="services">Services</section>
+
+        <section ref={serviceSection} id="services">
+          <div className="container">
+            <div className="section_heading">
+              <motion.h2
+                whileInView={{
+                  x: 0,
+                  opacity: 1
+                }}
+
+                initial={{
+                  x: 250,
+                  opacity: 0
+                }}
+
+                transition={{
+                  delay: 0.2,
+                  stiffness: 100,
+                  type: 'spring'
+                }}
+                viewport={{ once: true }}
+              >{languages[lang].services.top}
+                <div className="bottom_line"></div>
+              </motion.h2>
+            </div>
+
+            <div className="row g-5 justify-content-center">
+              <div className="col-lg-6">
+                <motion.div
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.2,
+                    stiffness: 80,
+                    type: 'spring'
+                  }}
+
+                  viewport={{ once: true }}
+                  className="service_container">
+                  <h3>{languages[lang].services.onepart.title}</h3>
+                  <div className="service_options">
+                    {
+                      languages[lang].services.onepart.options.map((el, idx) => (
+                        <motion.div
+                          whileInView={{
+                            x: 0,
+                            opacity: 1
+                          }}
+
+                          initial={{
+                            x: 100,
+                            opacity: 0
+                          }}
+
+                          transition={{
+                            delay: (idx + 1) * 0.3,
+                            stiffness: 60,
+                            type: 'spring'
+                          }}
+
+                          viewport={{ once: true }}
+                          key={idx} className="service_option">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {el}
+                        </motion.div>
+                      ))
+                    }
+                  </div>
+                </motion.div>
+              </div>
+
+              <div className="col-lg-6">
+                <motion.div
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.4,
+                    stiffness: 80,
+                    type: 'spring'
+                  }}
+
+                  viewport={{ once: true }}
+                  className="service_container">
+                  <h3>{languages[lang].services.twopart.title}</h3>
+                  <div className="service_options">
+                    {
+                      languages[lang].services.twopart.options.map((el, idx) => (
+                        <div key={idx} className="service_option">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {el}
+                        </div>
+                      ))
+                    }
+                  </div>
+                </motion.div>
+              </div>
+              <div className="col-lg-6">
+                <motion.div
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.6,
+                    stiffness: 80,
+                    type: 'spring'
+                  }}
+
+                  viewport={{ once: true }}
+                  className="service_container">
+                  <h3>{languages[lang].services.threepart.title}</h3>
+                  <div className="service_options">
+                    {
+                      languages[lang].services.threepart.options.map((el, idx) => (
+                        <div key={idx} className="service_option">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {el}
+                        </div>
+                      ))
+                    }
+                  </div>
+                </motion.div>
+              </div>
+              <div className="col-lg-6">
+                <motion.div
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.8,
+                    stiffness: 80,
+                    type: 'spring'
+                  }}
+
+                  viewport={{ once: true }}
+                  className="service_container">
+                  <h3>{languages[lang].services.fourpart.title}</h3>
+                  <div className="service_options">
+                    {
+                      languages[lang].services.fourpart.options.map((el, idx) => (
+                        <div key={idx} className="service_option">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {el}
+                        </div>
+                      ))
+                    }
+                  </div>
+                </motion.div>
+              </div>
+              <div className="col-lg-6">
+                <motion.div
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.6,
+                    stiffness: 80,
+                    type: 'spring'
+                  }}
+
+                  viewport={{ once: true }}
+                  className="service_container">
+                  <h3>{languages[lang].services.fivepart.title}</h3>
+                  <div className="service_options">
+                    {
+                      languages[lang].services.fivepart.options.map((el, idx) => (
+                        <div key={idx} className="service_option">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {el}
+                        </div>
+                      ))
+                    }
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
         <section ref={faqSection} id="faq">Faq</section>
         <section ref={contactSection} id="contact">Contact</section>
       </main>
