@@ -69,6 +69,13 @@ export const languages = [
                 ]
             }
         },
+        procestop: 'İş prosesimiz',
+        idea: 'İdeya',
+        plan: 'Plan',
+        prototip: 'Prototip',
+        destek: 'Dəstək',
+        connect: 'Bizimlə əlaqə',
+        phone: 'Telefon',
 
     },
     {
@@ -143,7 +150,14 @@ export const languages = [
                     ' Control of the opening and operation of company emails'
                 ]
             }
-        }
+        },
+        procestop: 'Our work process',
+        idea: 'Idea',
+        plan: 'Plan',
+        prototip: 'Prototype',
+        destek: 'Support',
+        connect: 'Contact us',
+        phone: 'Phone',
 
     },
     {
@@ -217,8 +231,14 @@ export const languages = [
 
                 ]
             }
-        }
-
+        },
+        procestop: 'Наш рабочий процесс',
+        idea: 'Идея',
+        plan: 'План',
+        prototip: 'Опытный образец',
+        destek: 'Поддерживать',
+        connect: 'Связаться с нами',
+        phone: 'Телефон',
 
     },
 

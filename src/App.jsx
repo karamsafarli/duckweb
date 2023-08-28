@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
+import FaqComponent from "../components/FAQ/FaqComponent";
 
 const App = () => {
   const [lang, setLang] = useState(0);
@@ -23,7 +24,7 @@ const App = () => {
 
 
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
     const aboutTop = aboutSection.current.getBoundingClientRect().top + window.scrollY;
     const aboutBottom = aboutSection.current.getBoundingClientRect().bottom + window.scrollY;
     const faqTop = faqSection.current.getBoundingClientRect().top + window.scrollY;
@@ -588,8 +589,290 @@ const App = () => {
             </div>
           </div>
         </section>
-        <section ref={faqSection} id="faq">Faq</section>
-        <section ref={contactSection} id="contact">Contact</section>
+
+        <section id="work_process">
+          <div className="container">
+            <div className="section_heading">
+              <motion.h2
+                whileInView={{
+                  x: 0,
+                  opacity: 1
+                }}
+
+                initial={{
+                  x: 250,
+                  opacity: 0
+                }}
+
+                transition={{
+                  delay: 0.2,
+                  stiffness: 100,
+                  type: 'spring'
+                }}
+                viewport={{ once: true }}
+              >{languages[lang].procestop}
+                <div className="bottom_line"></div>
+              </motion.h2>
+            </div>
+            <div className="process_container">
+              <motion.div
+                initial={{
+                  y: 200,
+                  opacity: 0
+                }}
+
+                whileInView={{
+                  y: 0,
+                  opacity: 1
+                }}
+
+                transition={{
+                  delay: 0.3
+                }}
+
+                viewport={{ once: true }}
+
+                className="process_step">
+                <div className="process_circle step_1">
+                  <img src="/assets/step1.png" alt="" />
+                  <motion.div
+                    initial={{
+                      scale: 0
+                    }}
+
+                    whileInView={{
+                      scale: 1
+                    }}
+
+                    transition={{ delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="step_num">01</motion.div>
+                </div>
+                <h5>{languages[lang].idea}</h5>
+              </motion.div>
+              <motion.div
+                initial={{
+                  y: 200,
+                  opacity: 0
+                }}
+
+                whileInView={{
+                  y: 0,
+                  opacity: 1
+                }}
+
+                transition={{
+                  delay: 0.5
+                }}
+
+                viewport={{ once: true }}
+                className="process_step step2_cont">
+                <div className="process_circle step_2">
+                  <img src="/assets/step2.png" alt="" />
+                  <motion.div
+                    initial={{
+                      scale: 0
+                    }}
+
+                    whileInView={{
+                      scale: 1
+                    }}
+
+                    transition={{ delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="step_num">02</motion.div>
+                </div>
+                <h5>{languages[lang].plan}</h5>
+              </motion.div>
+              <motion.div
+                initial={{
+                  y: 200,
+                  opacity: 0
+                }}
+
+                whileInView={{
+                  y: 0,
+                  opacity: 1
+                }}
+
+                transition={{
+                  delay: 0.7
+                }}
+
+                viewport={{ once: true }}
+                className="process_step">
+                <div className="process_circle step_3">
+                  <img src="/assets/step3.png" alt="" />
+                  <motion.div
+                    initial={{
+                      scale: 0
+                    }}
+
+                    whileInView={{
+                      scale: 1
+                    }}
+
+                    transition={{ delay: 0.8 }}
+                    viewport={{ once: true }}
+                    className="step_num">03</motion.div>
+                </div>
+                <h5>{languages[lang].prototip}</h5>
+              </motion.div>
+              <motion.div
+                initial={{
+                  y: 200,
+                  opacity: 0
+                }}
+
+                whileInView={{
+                  y: 0,
+                  opacity: 1
+                }}
+
+                transition={{
+                  delay: 0.9
+                }}
+
+                viewport={{ once: true }}
+                className="process_step step4_cont">
+                <div className="process_circle step_4">
+                  <img src="/assets/step4.png" alt="" />
+                  <motion.div
+                    initial={{
+                      scale: 0
+                    }}
+
+                    whileInView={{
+                      scale: 1
+                    }}
+
+                    transition={{ delay: 1 }}
+                    viewport={{ once: true }}
+                    className="step_num">04</motion.div>
+                </div>
+                <h5>{languages[lang].destek}</h5>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section ref={faqSection} id="faq">
+          <div className="container">
+            <div className="section_heading">
+              <motion.h2
+                whileInView={{
+                  x: 0,
+                  opacity: 1
+                }}
+
+                initial={{
+                  x: 250,
+                  opacity: 0
+                }}
+
+                transition={{
+                  delay: 0.2,
+                  stiffness: 100,
+                  type: 'spring'
+                }}
+                viewport={{ once: true }}
+              >Tez-tez verilən suallar
+                <div className="bottom_line"></div>
+              </motion.h2>
+            </div>
+
+            <div className="faq_container">
+              <FaqComponent
+                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
+                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
+              />
+              <FaqComponent
+                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
+                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
+              />
+              <FaqComponent
+                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
+                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
+              />
+              <FaqComponent
+                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
+                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section ref={contactSection} id="contact">
+          <div className="container">
+            <div className="section_heading">
+              <motion.h2
+                whileInView={{
+                  x: 0,
+                  opacity: 1
+                }}
+
+                initial={{
+                  x: 250,
+                  opacity: 0
+                }}
+
+                transition={{
+                  delay: 0.2,
+                  stiffness: 100,
+                  type: 'spring'
+                }}
+                viewport={{ once: true }}
+              >{languages[lang].connect}
+                <div className="bottom_line"></div>
+              </motion.h2>
+            </div>
+
+            <div className="row">
+              <div className="col-lg-3 col-md-6">
+                <div className="contact_card">
+                  <div className="imgcont">
+                    <img src="/assets/tel.png" alt="" />
+                  </div>
+                  <h3>{languages[lang].phone}</h3>
+                  <a href="">+994 50 000 00 00</a>
+                </div>
+              </div>
+
+
+              <div className="col-lg-3 col-md-6">
+                <div className="contact_card">
+                  <div className="imgcont">
+                    <img src="/assets/vp.png" alt="" />
+                  </div>
+                  <h3>Whatsapp</h3>
+                  <a href="">+994 50 000 00 00</a>
+                </div>
+              </div>
+
+
+              <div className="col-lg-3 col-md-6">
+                <div className="contact_card">
+                  <div className="imgcont">
+                    <img src="/assets/email.png" alt="" />
+                  </div>
+                  <h3>Email</h3>
+                  <a href="">Helloduckweb@gmail.com</a>
+                </div>
+              </div>
+
+
+              <div className="col-lg-3 col-md-6">
+                <div className="contact_card">
+                  <div className="imgcont">
+                    <img src="/assets/insta.png" alt="" />
+                  </div>
+                  <h3>Instagram</h3>
+                  <a href="">@duckweb</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer></footer>
