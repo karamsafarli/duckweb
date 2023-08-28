@@ -2,8 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
-
+import duck from "../public/assets/duck.png";
+import wp from "../public/assets/wp.png";
+import ig from "../public/assets/ig.png";
 const App = () => {
+
   const [lang, setLang] = useState(0);
   const [activeLink, setActiveLink] = useState('home');
   const [selectedLang, setSelectedLang] = useState('AZE');
@@ -592,7 +595,51 @@ const App = () => {
         <section ref={contactSection} id="contact">Contact</section>
       </main>
 
-      <footer></footer>
+      <footer>
+       <div className="container">
+        <div className="row g-5">
+          <div className="col-lg-3 image">
+           <h2>Logo</h2>
+          </div>
+          <div className="col-lg-3 text">
+            <p>{languages[lang].footerone.title}</p>
+          
+                   <ul>
+                    <li> <a href="#home"> {languages[lang].footerone.options[0]}</a></li>
+                    <li> <a href="#about">{languages[lang].footerone.options[1]} </a></li>
+                    <li> <a href="#services">{languages[lang].footerone.options[2]} </a> </li>
+                    <li> <a href="#faq">{languages[lang].footerone.options[3]} </a></li>
+                    <li> <a href="#contact">{languages[lang].footerone.options[4]} </a></li>
+                    
+                   </ul>
+                 
+          </div>
+          <div className="col-lg-4">
+          <p>{languages[lang].footertwo.title}</p>
+        
+                    {
+                      languages[lang].footertwo.options.map((el, idx) => (
+                      <ul>
+                        <li>{el}</li>
+                        
+                      </ul>
+                      ))
+                    }
+                 
+          </div>
+          <div className="col-lg-2 icons">
+          <p>{languages[lang].footerthree.title}</p>
+          <div className="iconss">
+<img src={wp} alt="" />
+<img src={ig} alt="" />
+          </div>
+          </div>
+        </div>
+        <div className="row copy g-5">
+          <h3>© Copyright <span>Duckweb. 2023</span>  Bütün hüquqlar qorunur.</h3>
+        </div>
+       </div>
+      </footer>
     </>
   )
 }

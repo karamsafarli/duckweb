@@ -69,6 +69,34 @@ export const languages = [
                 ]
             }
         },
+        
+        footerone:{ 
+            title:'Sayt Xəritəsi',
+            options:[
+                'Ana Səhifə',
+                'Haqqımızda',
+                'Xidmətlər',
+                'FAQ',
+                'Əlaqə'
+    
+            ]
+    
+        },
+        footertwo:{ 
+            title:'Xidmətlər',
+            options:[
+                'Veb Saytların Hazırlanması',
+                'Mobil Tətbiqlərin Hazırlanması',
+                'Sosial Media Marketinq',
+                'QR Kod Rəqəmsal Menyu',
+               
+    
+            ]
+    
+        },
+        footerthree:{
+            title:'Bizi İzləyin'
+        }
 
     },
     {
@@ -143,11 +171,41 @@ export const languages = [
                     ' Control of the opening and operation of company emails'
                 ]
             }
-        }
+        },
+        
+    footerone:{ 
+        title:'Site Map',
+        options:[
+            'Home page',
+            'About us',
+            'Services',
+            'FAQ',
+            'Contact'
+
+        ]
+
+    },
+    footertwo:{ 
+        title:'Services',
+        options:[
+            'Development of Websites',
+            'Mobile Application Development',
+            'Social Media Marketing',
+            'QR Code Digital Menu',
+           
+
+        ]
+
+    },
+    footerthree:{
+        title:'Follow us'
+    }
+
+
 
     },
     {
-        home: 'Плавная',
+        home: 'Главная ',
         about: 'О нас',
         service: 'Yслуги',
         faq: 'Частые вопросы',
@@ -217,8 +275,35 @@ export const languages = [
 
                 ]
             }
-        }
+        },
+        
+    footerone:{ 
+        title:'Карта сайта',
+        options:[
+            'Главная ',
+            'О нас',
+            'Услуги',
+            'FAQ',
+            'Контакт'
 
+        ]
+
+    },
+    footertwo:{ 
+        title:'Услуги',
+        options:[
+            'Разработка веб-сайтов',
+            'Разработка мобильных приложений',
+            'Маркетинг в области СМИ',
+            'Цифровое меню QR-кода',
+           
+
+        ]
+
+    },
+    footerthree:{
+        title:'Подписывайтесь на нас'
+    }
 
     },
 
