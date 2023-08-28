@@ -23,6 +23,7 @@ const App = () => {
 
 
   useEffect(() => {
+    window.scrollTo(0,0)
     const aboutTop = aboutSection.current.getBoundingClientRect().top + window.scrollY;
     const aboutBottom = aboutSection.current.getBoundingClientRect().bottom + window.scrollY;
     const faqTop = faqSection.current.getBoundingClientRect().top + window.scrollY;
@@ -228,7 +229,7 @@ const App = () => {
         </section>
 
         <section ref={aboutSection} id="about">
-          <div className="container">
+          {/* <div className="container">
             <div className="row">
               <div className="col-lg-6">
                 <motion.div
@@ -255,9 +256,7 @@ const App = () => {
                   <p>{languages[lang].heading3}</p>
                 </motion.div>
               </div>
-              <div
-
-                className="col-lg-6">
+              <div className="col-lg-6">
                 <div className="about_right">
                   <motion.div
                     whileInView={{
@@ -287,7 +286,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section ref={serviceSection} id="services">
