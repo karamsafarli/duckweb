@@ -828,6 +828,7 @@ const App = () => {
             </div>
 
             <div className="row">
+
               <div className="col-lg-3 col-md-6">
                 <div className="contact_card">
                   <div className="imgcont">
@@ -876,7 +877,9 @@ const App = () => {
       </main>
 
       <footer></footer>
+
     </>
+
   )
 }
 
