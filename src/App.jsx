@@ -229,7 +229,7 @@ const App = () => {
         </section>
 
         <section ref={aboutSection} id="about">
-          {/* <div className="container">
+          <div className="container">
             <div className="row">
               <div className="col-lg-6">
                 <motion.div
@@ -286,7 +286,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </section>
 
         <section ref={serviceSection} id="services">
