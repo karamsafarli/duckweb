@@ -103,6 +103,21 @@ export const languages = [
         },
         footerthree: {
             title: 'Bizi İzləyin'
+        },
+
+        contact_form: {
+            left: 'Xoş gördük, fikrinizi qısaca izah edərək, sizi maraqlandıran sualları göndərin, cavablandıraq.',
+            names: 'Ad Soyad',
+            phonenumber: 'Telefon Nömrəniz',
+            send: 'Göndər',
+            placeholder: 'Xidmətlər, qiymətlər və s. haqqında soruşa bilərsiniz...'
+        },
+
+        validation: {
+            name: 'Adınız və soyadınız qeyd edilməlidir.',
+            email1: 'Email qeyd edilməlidir.',
+            email2: 'Düzgün email daxil edin.',
+            text: 'Mesajınızı qeyd etməmisiniz.'
         }
 
     },
@@ -213,9 +228,22 @@ export const languages = [
         },
         footerthree: {
             title: 'Follow us'
+        },
+
+        contact_form: {
+            left: 'We welcome you, briefly explain your opinion, send us the questions you are interested in, and we will answer them.',
+            names: 'First name and last name',
+            phonenumber: 'Your Phone Number',
+            send: 'Send',
+            placeholder: 'Services, prices, etc. you can ask about...'
+        },
+
+        validation: {
+            name: 'Your first and last name must be mentioned.',
+            email1: 'Email must be specified.',
+            email2: 'Please enter a valid email.',
+            text: 'You have not saved your message.'
         }
-
-
 
     },
     {
@@ -324,8 +352,22 @@ export const languages = [
         },
         footerthree: {
             title: 'Подписывайтесь на нас'
-        }
+        },
 
+        contact_form: {
+            left: 'Мы приветствуем вас, кратко изложим ваше мнение, пришлем нам интересующие вас вопросы, и мы на них ответим.',
+            names: 'Имя и фамилия',
+            phonenumber: 'Ваш номер телефона',
+            send: 'Отправлять',
+            placeholder: 'Yслуги, цены и т.д. можно узнать...'
+        },
+
+        validation: {
+            name: 'Обязательно должны быть упомянуты ваше имя и фамилия.',
+            email1: 'Электронную почту необходимо указать.',
+            email2: 'Введите, пожалуйста, действительный адрес электронной почты.',
+            text: 'Вы не сохранили свое сообщение.'
+        }
     },
 
 ]

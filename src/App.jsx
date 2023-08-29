@@ -1,8 +1,11 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
 import FaqComponent from "../components/FAQ/FaqComponent";
+import wp from "/assets/wp.png";
+import ig from "/assets/ig.png";
 
 const App = () => {
   const [lang, setLang] = useState(0);
@@ -13,6 +16,21 @@ const App = () => {
   const faqSection = useRef();
   const serviceSection = useRef();
   const contactSection = useRef();
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    desc: ''
+  });
+
+  const [validation, setValidation] = useState({
+    name: '',
+    email: '',
+    desc: ''
+  });
+
+  const [isError, setIsError] = useState(false);
+
+  const [isClick, setIsClick] = useState(false);
 
   const handleLinkColor = (active) => {
     if (active === activeLink) {
@@ -22,6 +40,52 @@ const App = () => {
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsClick(true)
+  }
+
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  useEffect(() => {
+    let msg1 = '', msg2 = '', msg3 = '', err = false;
+    if (inputs.name.trim().length === 0) {
+      msg1 = languages[lang].validation.name;
+      err = true
+    } else {
+      msg1 = ''
+    }
+
+    if (inputs.email.trim().length === 0) {
+      msg2 = languages[lang].validation.email1;
+      err = true
+    }
+
+    else if (!inputs.email.trim().match(re)) {
+      msg2 = languages[lang].validation.email2;
+      err = true;
+    }
+    else {
+      msg1 = ''
+    }
+
+    if (inputs.desc.trim().length === 0) {
+      msg3 = languages[lang].validation.text;
+      err = true
+    } else {
+      msg3 = ''
+    }
+
+    setValidation({
+      ...validation,
+      name: msg1,
+      email: msg2,
+      desc: msg3
+    });
+
+    setIsError(err)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputs])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -872,11 +936,94 @@ const App = () => {
                 </div>
               </div>
             </div>
+
+            <div className="contact_form">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="cf_left">
+                    <p>👋 {languages[lang].contact_form.left}</p>
+                  </div>
+                </div>
+                <div className="col-lg-6">
+                  <div className="cf_right">
+                    <form>
+                      <div className="inputs">
+                        <div className="input_container">
+                          <label htmlFor="name">{languages[lang].contact_form.names}</label>
+                          <input
+                            className={isClick && !validation.name.trim().length == 0 ? `input_error` : ``}
+                            type="text" name="name" onChange={(e) => setInputs({ ...inputs, name: e.target.value })} />
+                          <h6 className="validation_error">{isClick && validation.name}</h6>
+                        </div>
+                        <div className="input_container">
+                          <label htmlFor="email">Email</label>
+                          <input
+                            className={isClick && !validation.email.trim().length == 0 ? `input_error` : ``}
+                            type="email" name="email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
+                          <h6 className="validation_error">{isClick && validation.email}</h6>
+                        </div>
+                      </div>
+
+                      <textarea
+                        className={isClick && !validation.desc.trim().length == 0 ? `input_error` : ``}
+                        cols="30" rows="8" placeholder={languages[lang].contact_form.placeholder} onChange={(e) => setInputs({ ...inputs, desc: e.target.value })}></textarea>
+                      <h6 className="validation_error mbottom">{isClick && validation.desc}</h6>
+                      <button onClick={handleSubmit} type="submit">{languages[lang].contact_form.send}</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+
+
       </main>
 
-      <footer></footer>
+      <footer>
+        <div className="container">
+          <div className="row g-5">
+            <div className="col-lg-3 image">
+              <h2>Logo</h2>
+            </div>
+            <div className="col-lg-3 text">
+              <p>{languages[lang].footerone.title}</p>
+
+              <ul>
+                <li> <a href="#home"> {languages[lang].footerone.options[0]}</a></li>
+                <li> <a href="#about">{languages[lang].footerone.options[1]} </a></li>
+                <li> <a href="#services">{languages[lang].footerone.options[2]} </a> </li>
+                <li> <a href="#faq">{languages[lang].footerone.options[3]} </a></li>
+                <li> <a href="#contact">{languages[lang].footerone.options[4]} </a></li>
+
+              </ul>
+
+            </div>
+            <div className="col-lg-4">
+              <p>{languages[lang].footertwo.title}</p>
+
+              {
+                languages[lang].footertwo.options.map((el, idx) => (
+                  <ul key={idx}>
+                    <li>{el}</li>
+                  </ul>
+                ))
+              }
+
+            </div>
+            <div className="col-lg-2 icons">
+              <p>{languages[lang].footerthree.title}</p>
+              <div className="iconss">
+                <img src={wp} alt="" />
+                <img src={ig} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="row copy g-5">
+            <h3>© Copyright <span>Duckweb. 2023</span>  Bütün hüquqlar qorunur.</h3>
+          </div>
+        </div>
+      </footer>
 
     </>
 
