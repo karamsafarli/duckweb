@@ -95,8 +95,7 @@ const App = () => {
     });
 
     setIsError(err)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputs])
+  }, [inputs, lang])
 
   useEffect(() => {
     // window.scrollTo(0, 0)
