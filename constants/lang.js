@@ -371,3 +371,61 @@ export const languages = [
     },
 
 ]
+
+
+export const faqContent = [
+    [
+        {
+            duckquestion: 'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?',
+            duckanswer: 'Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.',
+        },
+        {
+            duckquestion: 'Veb saytların hazırlanmasının qiyməti neçədir?',
+            duckanswer: 'Qiymətləndirmə prosesi aşağıdakı məsuliyyətlər və faktorlara əsaslanır: Texnologiya və funksiyalar,Dil və ölçü,SEO optimizasiyası,Təhlükəsizlik,Domain və hosting,Təlimat və dəstək.Bunlara əsasən qiymət dəyişə bilir'
+        },
+        {
+            duckquestion: 'Hansı növ SMM xidmətləri verirsiz?',
+            duckanswer: 'Sosial Media İdarəetməsi,İzləmə və Analitika,Çəkilişlər,Reklam Kampaniyaları,Müştəri Əlaqələri'
+        },
+        {
+            duckquestion: 'Rəqəmsal menyular haqda ətraflı məlumat verə bilərsinizmi?',
+            duckanswer: ' Rəqəmsal menyular restoran və kafe təşkilatlarında istifadə edilən bir texnologiyadır ki, müştərilərə elektron formada yemək siyahısı təqdim edir və onların sifarişlərini tətbiqdən və ya cihazdan etməyə imkan verir.Rəqəmsal menyuların üstünlükləri:İstifadə Asanlığı,Sifarişin Sürətlənməsi,Məlumat Təhlili,Elektron ödəniş '
+        }
+    ],
+    [
+        {
+            duckquestion: 'How long do you build and deliver websites?',
+            duckanswer: "Website development time varies depending on the customer's order. Basically, the duration can be 3 weeks, 1 month or several months, depending on the type of website. In any case, our main goal is to make our customers satisfied with their orders and deliver them in a short time.",
+        },
+        {
+            duckquestion: 'How much does website development cost?',
+            duckanswer: 'The pricing process is based on the following responsibilities and factors: Technology and features, Language and size, SEO optimization, Security, Domain and hosting, Manual and support.'
+        },
+        {
+            duckquestion: 'What types of SMM services do you provide?',
+            duckanswer: 'Social Media Management,Tracking & Analytics,Shooting,Ad Campaigns,Customer Relations'
+        },
+        {
+            duckquestion: 'Can you tell us more about the digital menus?',
+            duckanswer: 'Digital menus are a technology used in restaurant and cafe organizations that provide customers with a menu in electronic form and allow them to order from an app or device. Advantages of digital menus: Ease of use, Ordering speed, Data analysis, Electronic payment '
+        }
+    ],
+    [
+        {
+            duckquestion: 'Как долго вы создаете и доставляете веб-сайты?',
+            duckanswer: "Срок разработки сайта варьируется в зависимости от заказа клиента. В основном продолжительность может составлять 3 недели, 1 месяц или несколько месяцев, в зависимости от типа сайта. В любом случае, наша главная цель – чтобы наши клиенты остались довольны своими заказами и доставили их в кратчайшие сроки.",
+        },
+        {
+            duckquestion: 'Сколько стоит разработка сайта?',
+            duckanswer: 'Процесс ценообразования основан на следующих обязанностях и факторах: технология и функции, язык и размер, SEO-оптимизация, безопасность, домен и хостинг, руководство и поддержка.'
+        },
+        {
+            duckquestion: 'Какие виды SMM-услуг вы предоставляете?',
+            duckanswer: 'Управление социальными сетями, отслеживание и аналитика, съемка, рекламные кампании, работа с клиентами'
+        },
+        {
+            duckquestion: 'Можете ли вы рассказать нам больше о цифровых меню?',
+            duckanswer: 'Цифровые меню — это технология, используемая в организациях ресторанов и кафе, которая предоставляет клиентам меню в электронном виде и позволяет сделать заказ из приложения или устройства. Преимущества цифровых меню: Простота использования, Скорость заказа, Анализ данных, Электронная оплата.'
+        }
+    ]
+]

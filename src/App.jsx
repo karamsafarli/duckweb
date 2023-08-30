@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
 import FaqComponent from "../components/FAQ/FaqComponent";
+import { faqContent } from "../constants/lang";
 import wp from "/assets/wp.png";
 import ig from "/assets/ig.png";
 
@@ -16,6 +18,7 @@ const App = () => {
   const faqSection = useRef();
   const serviceSection = useRef();
   const contactSection = useRef();
+  const homeSection = useRef();
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -28,9 +31,17 @@ const App = () => {
     desc: ''
   });
 
+  const [isAnimate, setIsAnimate] = useState(false);
+
+  const [showGoUp, setShowGoUp] = useState(false);
+
   const [isError, setIsError] = useState(false);
 
   const [isClick, setIsClick] = useState(false);
+  const [mousePositions, setMousePositions] = useState({
+    y: '',
+    x: ''
+  })
 
   const handleLinkColor = (active) => {
     if (active === activeLink) {
@@ -88,8 +99,9 @@ const App = () => {
   }, [inputs])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     const aboutTop = aboutSection.current.getBoundingClientRect().top + window.scrollY;
+    const homeBottom = homeSection.current.getBoundingClientRect().bottom + window.scrollY;
     const aboutBottom = aboutSection.current.getBoundingClientRect().bottom + window.scrollY;
     const faqTop = faqSection.current.getBoundingClientRect().top + window.scrollY;
     const faqBottom = faqSection.current.getBoundingClientRect().bottom + window.scrollY;
@@ -98,6 +110,12 @@ const App = () => {
     const contactTop = contactSection.current.getBoundingClientRect().top + window.scrollY;
     const contactBottom = contactSection.current.getBoundingClientRect().bottom + window.scrollY;
     window.addEventListener('scroll', () => {
+      if (window.scrollY >= 600) {
+        setShowGoUp(true)
+      } else {
+        setShowGoUp(false)
+      }
+
       if (window.scrollY >= aboutTop && window.scrollY < aboutBottom) {
         setActiveLink('about')
       }
@@ -110,11 +128,35 @@ const App = () => {
       else if (window.scrollY >= contactTop && window.scrollY < contactBottom) {
         setActiveLink('contact')
       }
-      else {
+      else if (window.scrollY >= 0 && window.scrollY < homeBottom) {
         setActiveLink('home')
       }
-    })
+    });
+    window.addEventListener('mousemove', (e) => {
+      setMousePositions({
+        ...mousePositions,
+        y: e.clientY,
+        x: e.clientX
+      })
+
+      // window.addEventListener('click', () => {
+      //   setIsAnimate(true);
+
+      //   setTimeout(() => {
+      //     setIsAnimate(false)
+      //   }, 100)
+      // })
+
+    });
+
+    return () => {
+      window.removeEventListener('mousemove');
+      // window.removeEventListener('click')
+    }
+
   }, [])
+
+
   return (
     <>
       <nav>
@@ -177,7 +219,7 @@ const App = () => {
       </nav>
 
       <main>
-        <section id="home">
+        <section id="home" ref={homeSection}>
           <div className="container">
             <div className="row g-5">
               <div className="col-lg-5">
@@ -652,173 +694,175 @@ const App = () => {
               </div>
             </div>
           </div>
+
+          <section id="work_process">
+            <div className="container">
+              <div className="section_heading">
+                <motion.h2
+                  whileInView={{
+                    x: 0,
+                    opacity: 1
+                  }}
+
+                  initial={{
+                    x: 250,
+                    opacity: 0
+                  }}
+
+                  transition={{
+                    delay: 0.2,
+                    stiffness: 100,
+                    type: 'spring'
+                  }}
+                  viewport={{ once: true }}
+                >{languages[lang].procestop}
+                  <div className="bottom_line"></div>
+                </motion.h2>
+              </div>
+              <div className="process_container">
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    delay: 0.2
+                  }}
+
+                  viewport={{ once: true }}
+
+                  className="process_step">
+                  <div className="process_circle step_1">
+                    <img src="/assets/step1.png" alt="" />
+                    <motion.div
+                      initial={{
+                        scale: 0
+                      }}
+
+                      whileInView={{
+                        scale: 1
+                      }}
+
+                      transition={{ delay: 0.3 }}
+                      viewport={{ once: true }}
+                      className="step_num">01</motion.div>
+                  </div>
+                  <h5>{languages[lang].idea}</h5>
+                </motion.div>
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    delay: 0.4
+                  }}
+
+                  viewport={{ once: true }}
+                  className="process_step step2_cont">
+                  <div className="process_circle step_2">
+                    <img src="/assets/step2.png" alt="" />
+                    <motion.div
+                      initial={{
+                        scale: 0
+                      }}
+
+                      whileInView={{
+                        scale: 1
+                      }}
+
+                      transition={{ delay: 0.5 }}
+                      viewport={{ once: true }}
+                      className="step_num">02</motion.div>
+                  </div>
+                  <h5>{languages[lang].plan}</h5>
+                </motion.div>
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    delay: 0.6
+                  }}
+
+                  viewport={{ once: true }}
+                  className="process_step">
+                  <div className="process_circle step_3">
+                    <img src="/assets/step3.png" alt="" />
+                    <motion.div
+                      initial={{
+                        scale: 0
+                      }}
+
+                      whileInView={{
+                        scale: 1
+                      }}
+
+                      transition={{ delay: 0.7 }}
+                      viewport={{ once: true }}
+                      className="step_num">03</motion.div>
+                  </div>
+                  <h5>{languages[lang].prototip}</h5>
+                </motion.div>
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    delay: 0.8
+                  }}
+
+                  viewport={{ once: true }}
+                  className="process_step step4_cont">
+                  <div className="process_circle step_4">
+                    <img src="/assets/step4.png" alt="" />
+                    <motion.div
+                      initial={{
+                        scale: 0
+                      }}
+
+                      whileInView={{
+                        scale: 1
+                      }}
+
+                      transition={{ delay: 0.9 }}
+                      viewport={{ once: true }}
+                      className="step_num">04</motion.div>
+                  </div>
+                  <h5>{languages[lang].destek}</h5>
+                </motion.div>
+              </div>
+            </div>
+          </section>
         </section>
 
-        <section id="work_process">
-          <div className="container">
-            <div className="section_heading">
-              <motion.h2
-                whileInView={{
-                  x: 0,
-                  opacity: 1
-                }}
 
-                initial={{
-                  x: 250,
-                  opacity: 0
-                }}
-
-                transition={{
-                  delay: 0.2,
-                  stiffness: 100,
-                  type: 'spring'
-                }}
-                viewport={{ once: true }}
-              >{languages[lang].procestop}
-                <div className="bottom_line"></div>
-              </motion.h2>
-            </div>
-            <div className="process_container">
-              <motion.div
-                initial={{
-                  y: 200,
-                  opacity: 0
-                }}
-
-                whileInView={{
-                  y: 0,
-                  opacity: 1
-                }}
-
-                transition={{
-                  delay: 0.3
-                }}
-
-                viewport={{ once: true }}
-
-                className="process_step">
-                <div className="process_circle step_1">
-                  <img src="/assets/step1.png" alt="" />
-                  <motion.div
-                    initial={{
-                      scale: 0
-                    }}
-
-                    whileInView={{
-                      scale: 1
-                    }}
-
-                    transition={{ delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="step_num">01</motion.div>
-                </div>
-                <h5>{languages[lang].idea}</h5>
-              </motion.div>
-              <motion.div
-                initial={{
-                  y: 200,
-                  opacity: 0
-                }}
-
-                whileInView={{
-                  y: 0,
-                  opacity: 1
-                }}
-
-                transition={{
-                  delay: 0.5
-                }}
-
-                viewport={{ once: true }}
-                className="process_step step2_cont">
-                <div className="process_circle step_2">
-                  <img src="/assets/step2.png" alt="" />
-                  <motion.div
-                    initial={{
-                      scale: 0
-                    }}
-
-                    whileInView={{
-                      scale: 1
-                    }}
-
-                    transition={{ delay: 0.6 }}
-                    viewport={{ once: true }}
-                    className="step_num">02</motion.div>
-                </div>
-                <h5>{languages[lang].plan}</h5>
-              </motion.div>
-              <motion.div
-                initial={{
-                  y: 200,
-                  opacity: 0
-                }}
-
-                whileInView={{
-                  y: 0,
-                  opacity: 1
-                }}
-
-                transition={{
-                  delay: 0.7
-                }}
-
-                viewport={{ once: true }}
-                className="process_step">
-                <div className="process_circle step_3">
-                  <img src="/assets/step3.png" alt="" />
-                  <motion.div
-                    initial={{
-                      scale: 0
-                    }}
-
-                    whileInView={{
-                      scale: 1
-                    }}
-
-                    transition={{ delay: 0.8 }}
-                    viewport={{ once: true }}
-                    className="step_num">03</motion.div>
-                </div>
-                <h5>{languages[lang].prototip}</h5>
-              </motion.div>
-              <motion.div
-                initial={{
-                  y: 200,
-                  opacity: 0
-                }}
-
-                whileInView={{
-                  y: 0,
-                  opacity: 1
-                }}
-
-                transition={{
-                  delay: 0.9
-                }}
-
-                viewport={{ once: true }}
-                className="process_step step4_cont">
-                <div className="process_circle step_4">
-                  <img src="/assets/step4.png" alt="" />
-                  <motion.div
-                    initial={{
-                      scale: 0
-                    }}
-
-                    whileInView={{
-                      scale: 1
-                    }}
-
-                    transition={{ delay: 1 }}
-                    viewport={{ once: true }}
-                    className="step_num">04</motion.div>
-                </div>
-                <h5>{languages[lang].destek}</h5>
-              </motion.div>
-            </div>
-          </div>
-        </section>
 
         <section ref={faqSection} id="faq">
           <div className="container">
@@ -846,22 +890,31 @@ const App = () => {
             </div>
 
             <div className="faq_container">
-              <FaqComponent
-                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
-                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
-              />
-              <FaqComponent
-                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
-                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
-              />
-              <FaqComponent
-                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
-                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
-              />
-              <FaqComponent
-                answer={`Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.`}
-                question={'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?'}
-              />
+              {
+                faqContent[lang].map((el, idx) => (
+                  <motion.div key={idx}
+                    initial={{
+                      x: 350,
+                      opacity: 0
+                    }}
+
+                    transition={{
+                      stiffness: 100,
+                      type: 'spring',
+                      delay: (idx + 1) * 0.1
+                    }}
+
+                    whileInView={{
+                      x: 0,
+                      opacity: 1
+                    }}
+
+                    viewport={{ once: true }}
+                  >
+                    <FaqComponent answer={el.duckanswer} question={el.duckquestion} />
+                  </motion.div>
+                ))
+              }
             </div>
           </div>
         </section>
@@ -894,50 +947,138 @@ const App = () => {
             <div className="row">
 
               <div className="col-lg-3 col-md-6">
-                <div className="contact_card">
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    type: 'spring',
+                    stiffness: 60
+                  }}
+
+                  viewport={{ once: true }}
+                  className="contact_card">
                   <div className="imgcont">
                     <img src="/assets/tel.png" alt="" />
                   </div>
                   <h3>{languages[lang].phone}</h3>
                   <a href="">+994 50 000 00 00</a>
-                </div>
+                  <div className="overlay ovr_yellow"></div>
+                </motion.div>
               </div>
 
 
               <div className="col-lg-3 col-md-6">
-                <div className="contact_card">
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    type: 'spring',
+                    stiffness: 60
+                  }}
+
+                  viewport={{ once: true }}
+                  className="contact_card">
                   <div className="imgcont">
                     <img src="/assets/vp.png" alt="" />
                   </div>
                   <h3>Whatsapp</h3>
                   <a href="">+994 50 000 00 00</a>
-                </div>
+                  <div className="overlay ovr_green"></div>
+                </motion.div>
               </div>
 
 
               <div className="col-lg-3 col-md-6">
-                <div className="contact_card">
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    type: 'spring',
+                    stiffness: 60
+                  }}
+
+                  viewport={{ once: true }}
+                  className="contact_card">
                   <div className="imgcont">
                     <img src="/assets/email.png" alt="" />
                   </div>
                   <h3>Email</h3>
                   <a href="">Helloduckweb@gmail.com</a>
-                </div>
+                  <div className="overlay ovr_yellow"></div>
+                </motion.div>
               </div>
 
 
               <div className="col-lg-3 col-md-6">
-                <div className="contact_card">
+                <motion.div
+                  initial={{
+                    y: 200,
+                    opacity: 0
+                  }}
+
+                  whileInView={{
+                    y: 0,
+                    opacity: 1
+                  }}
+
+                  transition={{
+                    type: 'spring',
+                    stiffness: 60
+                  }}
+
+                  viewport={{ once: true }} className="contact_card">
                   <div className="imgcont">
                     <img src="/assets/insta.png" alt="" />
                   </div>
                   <h3>Instagram</h3>
                   <a href="">@duckweb</a>
-                </div>
+                  <div className="overlay ovr_gradient"></div>
+                </motion.div>
               </div>
             </div>
 
-            <div className="contact_form">
+            <motion.div
+              initial={{
+                y: 250,
+                opacity: 0
+              }}
+
+              whileInView={{
+                y: 0,
+                opacity: 1
+              }}
+
+              transition={{
+                type: 'spring',
+                stiffness: 60
+              }}
+
+              viewport={{ once: true }}
+              className="contact_form">
               <div className="row">
                 <div className="col-lg-6">
                   <div className="cf_left">
@@ -973,7 +1114,7 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -1024,7 +1165,31 @@ const App = () => {
           </div>
         </div>
       </footer>
+      <motion.div
+        animate={{
+          x: showGoUp ? 0 : 150,
+          opacity: showGoUp ? 1 : 0
+        }}
 
+        transition={{
+          stiffness: 100,
+          type: 'spring'
+        }}
+        className="go_up" onClick={() => window.scrollTo(0, 0)}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M16 6.66699V25.3337M16 6.66699L24 14.667M16 6.66699L8 14.667" stroke="#272829" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </motion.div>
+
+      <motion.div
+        animate={{
+          scale: isAnimate ? 0.8 : 1
+        }}
+        className="custom_mouse"
+        style={{ left: (parseInt(mousePositions.x) - 12), top: (parseInt(mousePositions.y) - 12) }}
+      >
+        <img src="/assets/rubber-duck.png" alt="" />
+      </motion.div>
     </>
 
   )

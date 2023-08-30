@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
 .faq_component {
     overflow: hidden;
     box-sizing: border-box;
@@ -35,14 +38,14 @@
 
     .faq_answer {
         color: rgba(38, 38, 38, 0.90);
-        font-size: 20px;
+        font-size: 19px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 155%;
         border-radius: 0px 0px 8px 8px;
         transition: .3s;
         min-height: 0;
         transform-origin: top;
-        
+        word-spacing: 5px;
     }
 }
