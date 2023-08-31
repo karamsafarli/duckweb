@@ -8,7 +8,11 @@
     outline: none;
     font-family: 'Montserrat', sans-serif;
     list-style: none;
-    cursor: none !important;
+
+    @media (min-width:991px) {
+        cursor: none !important;
+    }
+
     // &::selection {
     //     background-color: #262626;
     //     color: #FFD002;
@@ -46,6 +50,10 @@ body {
             }
 
             .nav_links {
+                @media (max-width: 992px) {
+                    display: none;
+                }
+
                 ul {
                     padding: 0;
                     margin: 0;
@@ -133,11 +141,19 @@ body {
         section {
             padding: 100px 0;
             overflow: hidden;
+
+            @media (max-width: 992px) {
+                padding-bottom: 0;
+            }
         }
 
         #home {
             .home_left {
                 padding-top: 50px;
+
+                @media (max-width: 768px) {
+                    padding-top: 10px;
+                }
 
                 h1 {
                     color: #272829;
@@ -147,16 +163,23 @@ body {
                     font-weight: 700;
                     line-height: 150%;
                     margin-bottom: 12px;
+
+                    @media (max-width: 768px) {
+                        font-size: 25px;
+                    }
                 }
 
                 p {
                     color: #262626;
-                    // font-family: Lato;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 155%;
                     margin-bottom: 32px;
+
+                    @media (max-width: 768px) {
+                        font-size: 12px;
+                    }
                 }
 
                 a {
@@ -174,6 +197,12 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
+                    @media (max-width: 768px) {
+                        font-size: 12px;
+                        height: 40px;
+                        width: 145px;
+                    }
                 }
             }
 
@@ -184,6 +213,10 @@ body {
                     width: 90%;
                     height: 490px;
                     margin-left: auto;
+
+                    @media (max-width: 768px) {
+                        height: auto;
+                    }
 
                     img {
                         width: 100%;
@@ -201,6 +234,17 @@ body {
                     left: -20px;
                     top: 73px;
 
+                    @media (max-width: 768px) {
+                        gap: 20px;
+                        top: 40px;
+                        left: 0;
+                    }
+
+                    @media (max-width: 450px) {
+                        gap: 15px;
+                        top: 20px;
+                    }
+
                     .home_service {
                         display: flex;
                         width: 311px;
@@ -212,6 +256,16 @@ body {
                         background: #FEFEFE;
                         box-shadow: 0px 0px 12px 0px rgba(34, 34, 34, 0.06);
 
+                        @media (max-width: 768px) {
+                            width: 200px;
+                            height: 40px;
+                        }
+
+                        @media (max-width: 450px) {
+                            width: 150px;
+                            height: 30px;
+                        }
+
                         &:nth-child(1) {
                             margin-left: 30px;
                         }
@@ -220,9 +274,22 @@ body {
                             margin-left: 30px;
                         }
 
-                        .icon {
+                        .iconn {
                             width: 36px;
                             height: 36px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            @media (max-width: 768px) {
+                                width: 20px;
+                                height: 20px;
+                            }
+
+                            @media (max-width: 450px) {
+                                width: 15px;
+                                height: 15px;
+                            }
 
                             img {
                                 width: 100%;
@@ -237,6 +304,14 @@ body {
                             font-style: normal;
                             font-weight: 500;
                             line-height: 150%;
+
+                            @media (max-width: 768px) {
+                                font-size: 10px;
+                            }
+
+                            @media (max-width: 450px) {
+                                font-size: 7px;
+                            }
                         }
                     }
                 }
@@ -247,12 +322,20 @@ body {
             .about_left {
                 padding-top: 50px;
 
+                @media (max-width: 768px) {
+                    padding-top: 0;
+                }
+
                 h3 {
                     color: #272829;
                     font-size: 20px;
                     font-style: normal;
                     font-weight: 700;
                     line-height: 150%;
+
+                    @media (max-width: 768px) {
+                        font-size: 14px;
+                    }
                 }
 
                 h2 {
@@ -261,6 +344,10 @@ body {
                     font-style: normal;
                     font-weight: 700;
                     line-height: 150%;
+
+                    @media (max-width: 768px) {
+                        font-size: 18px;
+                    }
                 }
 
                 p {
@@ -269,6 +356,10 @@ body {
                     font-style: normal;
                     font-weight: 500;
                     line-height: 155%;
+
+                    @media (max-width: 768px) {
+                        font-size: 12px;
+                    }
                 }
             }
 
@@ -309,6 +400,10 @@ body {
             justify-content: center;
             margin-bottom: 60px;
 
+            @media (max-width: 768px) {
+                margin-bottom: 40px;
+            }
+
             h2 {
                 color: #272829;
                 font-family: Roboto;
@@ -318,8 +413,13 @@ body {
                 line-height: 150%;
                 position: relative;
                 margin: 0;
+                text-align: center;
                 cursor: default;
                 z-index: 5;
+
+                @media (max-width: 768px) {
+                    font-size: 32px;
+                }
 
                 &:hover {
                     .bottom_line {
@@ -345,7 +445,6 @@ body {
 
             .service_container {
 
-                // padding-left: 40px;
                 h3 {
                     color: #272829;
                     font-size: 24px;
@@ -353,6 +452,10 @@ body {
                     font-weight: 700;
                     line-height: 150%;
                     margin-bottom: 20px;
+
+                    @media (max-width: 768px) {
+                        font-size: 18px;
+                    }
                 }
 
                 .service_options {
@@ -366,6 +469,10 @@ body {
                         font-weight: 500;
                         line-height: 150%;
                         margin-bottom: 16px;
+
+                        @media (max-width: 768px) {
+                            font-size: 12px;
+                        }
                     }
                 }
             }
@@ -375,6 +482,12 @@ body {
             .process_container {
                 display: flex;
                 justify-content: space-between;
+                flex-wrap: wrap;
+
+                @media (max-width: 992px) {
+                    gap: 50px;
+                    justify-content: center;
+                }
 
                 .process_step {
                     .process_circle {
@@ -440,7 +553,10 @@ body {
 
                 .step2_cont,
                 .step4_cont {
-                    padding-top: 70px;
+
+                    @media (min-width: 992px) {
+                        padding-top: 70px;
+                    }
                 }
             }
         }
@@ -545,8 +661,19 @@ body {
                 border-radius: 12px;
                 border: 1px solid rgba(38, 38, 38, 0.80);
 
+                @media (max-width: 992px) {
+                    margin-top: 60px;
+                }
+                @media (max-width: 768px) {
+                    padding: 40px 32px;
+                }
+
                 .cf_left {
                     padding-right: 40px;
+                    @media (max-width: 768px) {
+                        padding-right: 0;
+                        margin-bottom: 40px;
+                     }
 
                     .hand_icon {
                         width: 32px;
@@ -565,6 +692,9 @@ body {
                         font-style: normal;
                         font-weight: 700;
                         line-height: 150%;
+                        @media (max-width: 768px) {
+                           font-size: 18px;
+                        }
                     }
                 }
 
@@ -574,8 +704,17 @@ body {
                             display: flex;
                             justify-content: space-between;
 
+                            @media (max-width: 768px) {
+                                flex-direction: column;
+                            }
+
                             .input_container {
                                 width: 48%;
+
+                                @media (max-width: 768px) {
+                                    width: 100%;
+                                    margin-bottom: 10px;
+                                }
 
                                 label {
                                     color: rgba(38, 38, 38, 0.90);
@@ -835,7 +974,19 @@ body {
     position: fixed;
     bottom: 30px;
     right: 15px;
+    z-index: 2000;
     cursor: pointer;
+
+    svg {
+        @media (max-width: 768px) {
+            transform: scale(0.7);
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .custom_mouse {
@@ -845,6 +996,10 @@ body {
     pointer-events: none;
     width: 25px;
     height: 25px;
+
+    @media (max-width: 992px) {
+        display: none;
+    }
 
     img {
         width: 25px;

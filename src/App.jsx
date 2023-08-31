@@ -307,7 +307,7 @@ const App = () => {
                         type: 'spring'
                       }}
                       className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
-                      <div className="icon">
+                      <div className="iconn">
                         <img src="/assets/globe.png" alt="" />
                       </div>
                       <p>{languages[lang].first}</p>
@@ -328,7 +328,7 @@ const App = () => {
                         type: 'spring'
                       }}
                       className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
-                      <div className="icon">
+                      <div className="iconn">
                         <img src="/assets/smmicon.png" alt="" />
                       </div>
                       <p>{languages[lang].second}</p>
@@ -349,7 +349,7 @@ const App = () => {
                         type: 'spring'
                       }}
                       className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
-                      <div className="icon">
+                      <div className="iconn">
                         <img src="/assets/qricon.png" alt="" />
                       </div>
                       <p>{languages[lang].third}</p>

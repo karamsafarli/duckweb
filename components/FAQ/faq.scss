@@ -8,6 +8,8 @@
     .faq_question {
         display: flex;
         justify-content: space-between;
+        gap: 10px;
+        align-items: center;
         padding: 16px;
         border-radius: 8px;
         border: 1px solid rgba(38, 38, 38, 0.02);
@@ -24,7 +26,17 @@
             line-height: 150%;
             margin: 0;
             transition: .2s;
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
+            @media (max-width: 450px) {
+                font-size: 11px;
+            }
         }
+
+       .faq_icon {
+        width: 32px;
+       }
     }
 
     .wrapper {
@@ -47,5 +59,11 @@
         min-height: 0;
         transform-origin: top;
         word-spacing: 5px;
+        @media (max-width: 768px) {
+            font-size: 13px;
+        }
+        @media (max-width: 450px) {
+            font-size: 10px;
+        }
     }
 }
