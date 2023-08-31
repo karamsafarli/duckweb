@@ -37,6 +37,8 @@ const App = () => {
 
   const [isError, setIsError] = useState(false);
 
+  const [theme, setTheme] = useState('light');
+
   const [isClick, setIsClick] = useState(false);
   const [mousePositions, setMousePositions] = useState({
     y: '',
@@ -98,7 +100,9 @@ const App = () => {
   }, [inputs, lang])
 
   useEffect(() => {
-    // window.scrollTo(0, 0)
+    if (localStorage.getItem('theme')) {
+      setTheme(localStorage.getItem('theme'))
+    }
     const aboutTop = aboutSection.current.getBoundingClientRect().top + window.scrollY;
     const homeBottom = homeSection.current.getBoundingClientRect().bottom + window.scrollY;
     const aboutBottom = aboutSection.current.getBoundingClientRect().bottom + window.scrollY;
@@ -155,10 +159,16 @@ const App = () => {
 
   }, [])
 
+  const changeTheme = () => {
+    localStorage.setItem('theme', theme == 'light' ? 'dark' : 'light');
+    setTheme(localStorage.getItem('theme'));
+    console.log(theme)
+  }
+
 
   return (
     <>
-      <nav>
+      <nav className={theme === 'dark' && 'darknav'}>
         <div className="container">
           <div className="logo">
             <a href="#">Logo</a>
@@ -198,26 +208,43 @@ const App = () => {
               </li>
             </ul>
           </div>
-          <div className="lang" onClick={() => setToggleModal((prev) => !prev)}>
-            <div className="selected_lang" >
-              <span>{selectedLang}</span>
-              <motion.svg animate={{ rotate: toggleModal ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
-                <path d="M6.30669 9.24946L0.311688 2.39696C-0.395811 1.59071 0.179188 0.324463 1.25294 0.324463H13.2429C13.4832 0.324257 13.7185 0.393323 13.9206 0.523389C14.1226 0.653455 14.2829 0.839009 14.3822 1.05783C14.4816 1.27665 14.5157 1.51946 14.4806 1.75718C14.4455 1.99491 14.3426 2.21747 14.1842 2.39821L8.18919 9.24821C8.07186 9.38247 7.92717 9.49008 7.76483 9.56381C7.60248 9.63754 7.42624 9.67569 7.24794 9.67569C7.06964 9.67569 6.8934 9.63754 6.73105 9.56381C6.56871 9.49008 6.42402 9.38247 6.30669 9.24821V9.24946Z" fill="#FAFAFA" />
-              </motion.svg>
+          <div className="nav_actions">
+            <div className="lang" onClick={() => setToggleModal((prev) => !prev)}>
+              <div className="selected_lang" >
+                <span>{selectedLang}</span>
+                <motion.svg animate={{ rotate: toggleModal ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                  <path d="M6.30669 9.24946L0.311688 2.39696C-0.395811 1.59071 0.179188 0.324463 1.25294 0.324463H13.2429C13.4832 0.324257 13.7185 0.393323 13.9206 0.523389C14.1226 0.653455 14.2829 0.839009 14.3822 1.05783C14.4816 1.27665 14.5157 1.51946 14.4806 1.75718C14.4455 1.99491 14.3426 2.21747 14.1842 2.39821L8.18919 9.24821C8.07186 9.38247 7.92717 9.49008 7.76483 9.56381C7.60248 9.63754 7.42624 9.67569 7.24794 9.67569C7.06964 9.67569 6.8934 9.63754 6.73105 9.56381C6.56871 9.49008 6.42402 9.38247 6.30669 9.24821V9.24946Z" fill="#FAFAFA" />
+                </motion.svg>
+              </div>
+              {
+                toggleModal &&
+                <motion.div animate={{ y: 0, opacity: 1 }} initial={{ opacity: 0, y: 20 }} className="lang_options">
+                  <div className="option" style={{ backgroundColor: lang === 0 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('AZE'); setLang(0) }}>AZE</div>
+                  <div className="option" style={{ backgroundColor: lang === 1 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('ENG'); setLang(1) }}>ENG</div>
+                  <div className="option" style={{ backgroundColor: lang === 2 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('RUS'); setLang(2) }}>RUS</div>
+                </motion.div>
+              }
             </div>
-            {
-              toggleModal &&
-              <motion.div animate={{ y: 0, opacity: 1 }} initial={{ opacity: 0, y: 20 }} className="lang_options">
-                <div className="option" style={{ backgroundColor: lang === 0 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('AZE'); setLang(0) }}>AZE</div>
-                <div className="option" style={{ backgroundColor: lang === 1 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('ENG'); setLang(1) }}>ENG</div>
-                <div className="option" style={{ backgroundColor: lang === 2 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('RUS'); setLang(2) }}>RUS</div>
-              </motion.div>
-            }
+
+            <div className="theme" onClick={changeTheme}>
+
+              {
+                theme === 'light' ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                    <path d="M5.84172 2.69565C5.84172 9.30435 11.1895 14.6522 17.7982 14.6522C18.3743 14.6522 18.9395 14.6087 19.4939 14.5326C17.7439 17.2174 14.7222 19 11.2765 19C5.87433 19 1.4939 14.6196 1.4939 9.21739C1.4939 5.77174 3.27651 2.75 5.96129 1C5.8852 1.55435 5.84172 2.11957 5.84172 2.69565Z" stroke="#FEFEFE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M10.994 1.5V3.875M17.7116 4.28244L16.0322 5.96183M20.494 11H18.119M17.7116 17.7176L16.0322 16.0382M10.994 18.125V20.5M5.95585 16.0382L4.27646 17.7176M3.86902 11H1.49402M5.95585 5.96183L4.27646 4.28244M14.9524 11C14.9524 12.0498 14.5353 13.0566 13.793 13.799C13.0507 14.5413 12.0438 14.9583 10.994 14.9583C9.9442 14.9583 8.93739 14.5413 8.19505 13.799C7.45272 13.0566 7.03569 12.0498 7.03569 11C7.03569 9.95018 7.45272 8.94337 8.19505 8.20104C8.93739 7.4587 9.9442 7.04167 10.994 7.04167C12.0438 7.04167 13.0507 7.4587 13.793 8.20104C14.5353 8.94337 14.9524 9.95018 14.9524 11Z" stroke="#FFD002" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )
+              }
+            </div>
           </div>
         </div>
       </nav>
 
-      <main>
+      <main className={theme === 'dark' && 'darkmode_primary'}>
         <section id="home" ref={homeSection}>
           <div className="container">
             <div className="row g-5">
@@ -240,7 +267,7 @@ const App = () => {
                   className="home_left">
                   <h1>{languages[lang].main}</h1>
                   <p>{languages[lang].texting}</p>
-                  <a href="">{languages[lang].buttonlng}</a>
+                  <a href="#contact">{languages[lang].buttonlng}</a>
                 </motion.div>
               </div>
               <div className="col-lg-7">
@@ -279,7 +306,7 @@ const App = () => {
                         stiffness: 100,
                         type: 'spring'
                       }}
-                      className="home_service">
+                      className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
                       <div className="icon">
                         <img src="/assets/globe.png" alt="" />
                       </div>
@@ -300,7 +327,7 @@ const App = () => {
                         stiffness: 100,
                         type: 'spring'
                       }}
-                      className="home_service">
+                      className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
                       <div className="icon">
                         <img src="/assets/smmicon.png" alt="" />
                       </div>
@@ -321,7 +348,7 @@ const App = () => {
                         stiffness: 100,
                         type: 'spring'
                       }}
-                      className="home_service">
+                      className={`home_service ${theme === 'dark' && 'darkmode_secondary'}`}>
                       <div className="icon">
                         <img src="/assets/qricon.png" alt="" />
                       </div>
@@ -750,7 +777,7 @@ const App = () => {
 
                       transition={{ delay: 0.3 }}
                       viewport={{ once: true }}
-                      className="step_num">01</motion.div>
+                      className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>01</motion.div>
                   </div>
                   <h5>{languages[lang].idea}</h5>
                 </motion.div>
@@ -784,7 +811,7 @@ const App = () => {
 
                       transition={{ delay: 0.5 }}
                       viewport={{ once: true }}
-                      className="step_num">02</motion.div>
+                      className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>02</motion.div>
                   </div>
                   <h5>{languages[lang].plan}</h5>
                 </motion.div>
@@ -818,7 +845,7 @@ const App = () => {
 
                       transition={{ delay: 0.7 }}
                       viewport={{ once: true }}
-                      className="step_num">03</motion.div>
+                      className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>03</motion.div>
                   </div>
                   <h5>{languages[lang].prototip}</h5>
                 </motion.div>
@@ -852,7 +879,7 @@ const App = () => {
 
                       transition={{ delay: 0.9 }}
                       viewport={{ once: true }}
-                      className="step_num">04</motion.div>
+                      className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>04</motion.div>
                   </div>
                   <h5>{languages[lang].destek}</h5>
                 </motion.div>
@@ -910,7 +937,7 @@ const App = () => {
 
                     viewport={{ once: true }}
                   >
-                    <FaqComponent answer={el.duckanswer} question={el.duckquestion} />
+                    <FaqComponent isDark={theme === 'dark'} answer={el.duckanswer} question={el.duckquestion} />
                   </motion.div>
                 ))
               }
@@ -963,7 +990,7 @@ const App = () => {
                   }}
 
                   viewport={{ once: true }}
-                  className="contact_card">
+                  className={`contact_card ${theme === 'dark' && 'darkmode_secondary'}`}>
                   <div className="imgcont">
                     <img src="/assets/tel.png" alt="" />
                   </div>
@@ -992,7 +1019,7 @@ const App = () => {
                   }}
 
                   viewport={{ once: true }}
-                  className="contact_card">
+                  className={`contact_card ${theme === 'dark' && 'darkmode_secondary'}`}>
                   <div className="imgcont">
                     <img src="/assets/vp.png" alt="" />
                   </div>
@@ -1021,7 +1048,7 @@ const App = () => {
                   }}
 
                   viewport={{ once: true }}
-                  className="contact_card">
+                  className={`contact_card ${theme === 'dark' && 'darkmode_secondary'}`}>
                   <div className="imgcont">
                     <img src="/assets/email.png" alt="" />
                   </div>
@@ -1049,7 +1076,8 @@ const App = () => {
                     stiffness: 60
                   }}
 
-                  viewport={{ once: true }} className="contact_card">
+                  viewport={{ once: true }}
+                  className={`contact_card ${theme === 'dark' && 'darkmode_secondary'}`}>
                   <div className="imgcont">
                     <img src="/assets/insta.png" alt="" />
                   </div>
@@ -1120,7 +1148,7 @@ const App = () => {
 
       </main>
 
-      <footer>
+      <footer className={theme === 'dark' && 'darkmode_primary'}>
         <div className="container">
           <div className="row g-5">
             <div className="col-lg-3 image">
