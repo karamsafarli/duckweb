@@ -165,7 +165,7 @@ body {
                     margin-bottom: 12px;
 
                     @media (max-width: 768px) {
-                        font-size: 25px;
+                        font-size: 27px;
                     }
                 }
 
@@ -178,7 +178,7 @@ body {
                     margin-bottom: 32px;
 
                     @media (max-width: 768px) {
-                        font-size: 12px;
+                        font-size: 14px;
                     }
                 }
 
@@ -199,7 +199,7 @@ body {
                     align-items: center;
 
                     @media (max-width: 768px) {
-                        font-size: 12px;
+                        font-size: 13px;
                         height: 40px;
                         width: 145px;
                     }
@@ -245,6 +245,11 @@ body {
                         top: 20px;
                     }
 
+                    @media (max-width: 365px) {
+                        gap: 5px;
+                        top: 15px;
+                    }
+
                     .home_service {
                         display: flex;
                         width: 311px;
@@ -262,8 +267,12 @@ body {
                         }
 
                         @media (max-width: 450px) {
-                            width: 150px;
-                            height: 30px;
+                            width: 180px;
+                            height: 40px;
+                        }
+
+                        @media (max-width: 365px) {
+                            transform: scale(0.8) !important;
                         }
 
                         &:nth-child(1) {
@@ -310,7 +319,7 @@ body {
                             }
 
                             @media (max-width: 450px) {
-                                font-size: 7px;
+                                font-size: 9px;
                             }
                         }
                     }
@@ -334,7 +343,7 @@ body {
                     line-height: 150%;
 
                     @media (max-width: 768px) {
-                        font-size: 14px;
+                        font-size: 15px;
                     }
                 }
 
@@ -346,7 +355,7 @@ body {
                     line-height: 150%;
 
                     @media (max-width: 768px) {
-                        font-size: 18px;
+                        font-size: 20px;
                     }
                 }
 
@@ -358,7 +367,7 @@ body {
                     line-height: 155%;
 
                     @media (max-width: 768px) {
-                        font-size: 12px;
+                        font-size: 13px;
                     }
                 }
             }
@@ -371,6 +380,13 @@ body {
                     overflow: hidden;
                     margin-left: auto;
                     position: relative;
+
+                    @media (max-width: 768px) {
+                        width: 80%;
+                        height: auto;
+                        aspect-ratio: 1/1;
+                        margin: 20px auto 0 auto;
+                    }
 
                     img {
                         width: 100%;
@@ -436,6 +452,10 @@ body {
                     z-index: -1;
                     bottom: 13px;
                     transition: 0.3s;
+
+                    @media (max-width: 768px) {
+                        height: 8px;
+                    }
                 }
             }
         }
@@ -444,6 +464,13 @@ body {
 
 
             .service_container {
+                @media (max-width: 768px) {
+                    padding-left: 8%;
+                }
+
+                @media (max-width: 350px) {
+                    padding-left: 0;
+                }
 
                 h3 {
                     color: #272829;
@@ -454,7 +481,7 @@ body {
                     margin-bottom: 20px;
 
                     @media (max-width: 768px) {
-                        font-size: 18px;
+                        font-size: 19px;
                     }
                 }
 
@@ -471,7 +498,11 @@ body {
                         margin-bottom: 16px;
 
                         @media (max-width: 768px) {
-                            font-size: 12px;
+                            font-size: 13px;
+                        }
+
+                        .svgcont {
+                            width: 24px !important;
                         }
                     }
                 }
@@ -663,17 +694,20 @@ body {
 
                 @media (max-width: 992px) {
                     margin-top: 60px;
+                    margin-bottom: 40px;
                 }
+
                 @media (max-width: 768px) {
                     padding: 40px 32px;
                 }
 
                 .cf_left {
                     padding-right: 40px;
-                    @media (max-width: 768px) {
+
+                    @media (max-width: 992px) {
                         padding-right: 0;
                         margin-bottom: 40px;
-                     }
+                    }
 
                     .hand_icon {
                         width: 32px;
@@ -692,8 +726,9 @@ body {
                         font-style: normal;
                         font-weight: 700;
                         line-height: 150%;
+
                         @media (max-width: 768px) {
-                           font-size: 18px;
+                            font-size: 18px;
                         }
                     }
                 }
@@ -706,6 +741,7 @@ body {
 
                             @media (max-width: 768px) {
                                 flex-direction: column;
+                                gap: 20px;
                             }
 
                             .input_container {
@@ -713,7 +749,6 @@ body {
 
                                 @media (max-width: 768px) {
                                     width: 100%;
-                                    margin-bottom: 10px;
                                 }
 
                                 label {
@@ -723,6 +758,10 @@ body {
                                     font-weight: 700;
                                     line-height: 150%;
                                     margin-bottom: 10px;
+
+                                    @media (max-width: 768px) {
+                                        font-size: 15px;
+                                    }
                                 }
 
                                 input {
@@ -736,6 +775,10 @@ body {
                                     font-style: normal;
                                     font-weight: 600;
                                     line-height: 150%;
+
+                                    @media (max-width: 768px) {
+                                        font-size: 15px;
+                                    }
 
                                     &:focus {
                                         border: 1px solid rgba(255, 208, 2, 0.70);
@@ -755,6 +798,10 @@ body {
                             font-style: normal;
                             font-weight: 500;
                             margin: 32px 0 0 0;
+
+                            @media (max-width: 768px) {
+                                font-size: 15px;
+                            }
 
                             &:focus {
                                 border: 1px solid rgba(255, 208, 2, 0.70);

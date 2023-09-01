@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
+const apiKey = import.meta.env.VITE_PUBLIC_KEY;
+const serviceID = import.meta.env.VITE_SERVICE_ID;
+const templateID = import.meta.env.VITE_TEMPLATE_ID;
 import { useEffect, useRef, useState } from "react";
 import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
@@ -8,6 +11,9 @@ import FaqComponent from "../components/FAQ/FaqComponent";
 import { faqContent } from "../constants/lang";
 import wp from "/assets/wp.png";
 import ig from "/assets/ig.png";
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [lang, setLang] = useState(0);
@@ -43,7 +49,9 @@ const App = () => {
   const [mousePositions, setMousePositions] = useState({
     y: '',
     x: ''
-  })
+  });
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleLinkColor = (active) => {
     if (active === activeLink) {
@@ -53,9 +61,20 @@ const App = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const form = useRef();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsClick(true)
+
+
+    if (!isError) {
+      emailjs.sendForm(serviceID, templateID, form.current, apiKey)
+        .then(() => setInputs({ name: '', email: '', desc: '' }));
+      toast("Sent successfully");
+      setIsClick(false);
+    } else {
+      setIsClick(true);
+    }
   }
 
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -100,6 +119,7 @@ const App = () => {
   }, [inputs, lang])
 
   useEffect(() => {
+    console.log(isMobile)
     if (localStorage.getItem('theme')) {
       setTheme(localStorage.getItem('theme'))
     }
@@ -168,7 +188,7 @@ const App = () => {
 
   return (
     <>
-      <nav className={theme === 'dark' && 'darknav'}>
+      <nav className={theme === 'dark' ? 'darknav' : undefined}>
         <div className="container">
           <div className="logo">
             <a href="#">Logo</a>
@@ -244,7 +264,7 @@ const App = () => {
         </div>
       </nav>
 
-      <main className={theme === 'dark' && 'darkmode_primary'}>
+      <main className={theme === 'dark' ? 'darkmode_primary' : undefined}>
         <section id="home" ref={homeSection}>
           <div className="container">
             <div className="row g-5">
@@ -372,7 +392,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: -250,
+                    x: isMobile ? -200 : -250,
                     opacity: 0
                   }}
 
@@ -399,7 +419,7 @@ const App = () => {
                     }}
 
                     initial={{
-                      x: 250,
+                      x: isMobile ? 200 : 250,
                       opacity: 0,
                       rotate: 60
                     }}
@@ -432,7 +452,7 @@ const App = () => {
                 }}
 
                 initial={{
-                  x: 250,
+                  x: isMobile ? 150 : 250,
                   opacity: 0
                 }}
 
@@ -448,7 +468,7 @@ const App = () => {
             </div>
 
             <div className="row g-5 justify-content-center">
-              <div className="col-lg-5">
+              <div className="col-lg-5 col-md-6">
                 <motion.div
                   whileInView={{
                     x: 0,
@@ -456,7 +476,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0,
                   }}
 
@@ -479,22 +499,24 @@ const App = () => {
                           }}
 
                           initial={{
-                            x: 120,
+                            x: isMobile ? 80 : 120,
                             opacity: 0
                           }}
 
                           transition={{
-                            delay: (idx + 1) * 0.1,
+                            delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1,
                             stiffness: 60,
                             type: 'spring'
                           }}
 
                           viewport={{ once: true }}
                           key={idx} className="service_option">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <div className="svgcont">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
                           {el}
                         </motion.div>
                       ))
@@ -502,7 +524,7 @@ const App = () => {
                   </div>
                 </motion.div>
               </div>
-              <div className="col-lg-5">
+              <div className="col-lg-5 col-md-6">
                 <motion.div
                   whileInView={{
                     x: 0,
@@ -510,7 +532,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0
                   }}
 
@@ -533,22 +555,24 @@ const App = () => {
                           }}
 
                           initial={{
-                            x: 120,
+                            x: isMobile ? 80 : 120,
                             opacity: 0
                           }}
 
                           transition={{
-                            delay: (idx + 1) * 0.1,
+                            delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1,
                             stiffness: 60,
                             type: 'spring'
                           }}
 
                           viewport={{ once: true }}
                           key={idx} className="service_option">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <div className="svgcont">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
                           {el}
                         </motion.div>
                       ))
@@ -556,7 +580,7 @@ const App = () => {
                   </div>
                 </motion.div>
               </div>
-              <div className="col-lg-5">
+              <div className="col-lg-5 col-md-6">
                 <motion.div
                   whileInView={{
                     x: 0,
@@ -564,7 +588,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0
                   }}
 
@@ -587,22 +611,24 @@ const App = () => {
                           }}
 
                           initial={{
-                            x: 120,
+                            x: isMobile ? 80 : 120,
                             opacity: 0
                           }}
 
                           transition={{
-                            delay: (idx + 1) * 0.1,
+                            delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1,
                             stiffness: 60,
                             type: 'spring'
                           }}
 
                           viewport={{ once: true }}
                           key={idx} className="service_option">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <div className="svgcont">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
                           {el}
                         </motion.div>
                       ))
@@ -610,7 +636,7 @@ const App = () => {
                   </div>
                 </motion.div>
               </div>
-              <div className="col-lg-5">
+              <div className="col-lg-5 col-md-6">
                 <motion.div
                   whileInView={{
                     x: 0,
@@ -618,7 +644,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0
                   }}
 
@@ -641,22 +667,24 @@ const App = () => {
                           }}
 
                           initial={{
-                            x: 120,
+                            x: isMobile ? 80 : 120,
                             opacity: 0
                           }}
 
                           transition={{
-                            delay: (idx + 1) * 0.1,
+                            delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1,
                             stiffness: 60,
                             type: 'spring'
                           }}
 
                           viewport={{ once: true }}
                           key={idx} className="service_option">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <div className="svgcont">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
                           {el}
                         </motion.div>
                       ))
@@ -664,7 +692,7 @@ const App = () => {
                   </div>
                 </motion.div>
               </div>
-              <div className="col-lg-5">
+              <div className="col-lg-5 col-md-7">
                 <motion.div
                   whileInView={{
                     x: 0,
@@ -672,7 +700,7 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0
                   }}
 
@@ -695,22 +723,24 @@ const App = () => {
                           }}
 
                           initial={{
-                            x: 120,
+                            x: isMobile ? 80 : 120,
                             opacity: 0
                           }}
 
                           transition={{
-                            delay: (idx + 1) * 0.1,
+                            delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1,
                             stiffness: 60,
                             type: 'spring'
                           }}
 
                           viewport={{ once: true }}
                           key={idx} className="service_option">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          <div className="svgcont">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M22 4L12 14.01L9 11.01" stroke="#FFD002" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </div>
                           {el}
                         </motion.div>
                       ))
@@ -731,12 +761,12 @@ const App = () => {
                   }}
 
                   initial={{
-                    x: 250,
+                    x: isMobile ? 150 : 250,
                     opacity: 0
                   }}
 
                   transition={{
-                    delay: 0.2,
+                    delay: isMobile ? 0.1 : 0.2,
                     stiffness: 100,
                     type: 'spring'
                   }}
@@ -748,7 +778,7 @@ const App = () => {
               <div className="process_container">
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 150 : 200,
                     opacity: 0
                   }}
 
@@ -758,7 +788,7 @@ const App = () => {
                   }}
 
                   transition={{
-                    delay: 0.2
+                    delay: isMobile ? 0.1 : 0.2
                   }}
 
                   viewport={{ once: true }}
@@ -775,15 +805,16 @@ const App = () => {
                         scale: 1
                       }}
 
-                      transition={{ delay: 0.3 }}
+                      transition={{ delay: isMobile ? 0.15 : 0.3 }}
                       viewport={{ once: true }}
                       className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>01</motion.div>
                   </div>
                   <h5>{languages[lang].idea}</h5>
                 </motion.div>
+
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 150 : 200,
                     opacity: 0
                   }}
 
@@ -793,7 +824,7 @@ const App = () => {
                   }}
 
                   transition={{
-                    delay: 0.4
+                    delay: isMobile ? 0.1 : 0.3
                   }}
 
                   viewport={{ once: true }}
@@ -809,7 +840,7 @@ const App = () => {
                         scale: 1
                       }}
 
-                      transition={{ delay: 0.5 }}
+                      transition={{ delay: isMobile ? 0.15 : 0.4 }}
                       viewport={{ once: true }}
                       className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>02</motion.div>
                   </div>
@@ -817,7 +848,7 @@ const App = () => {
                 </motion.div>
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 150 : 200,
                     opacity: 0
                   }}
 
@@ -827,7 +858,7 @@ const App = () => {
                   }}
 
                   transition={{
-                    delay: 0.6
+                    delay: isMobile ? 0.1 : 0.5
                   }}
 
                   viewport={{ once: true }}
@@ -843,7 +874,7 @@ const App = () => {
                         scale: 1
                       }}
 
-                      transition={{ delay: 0.7 }}
+                      transition={{ delay: isMobile ? 0.15 : 0.6 }}
                       viewport={{ once: true }}
                       className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>03</motion.div>
                   </div>
@@ -851,7 +882,7 @@ const App = () => {
                 </motion.div>
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 150 : 200,
                     opacity: 0
                   }}
 
@@ -861,7 +892,7 @@ const App = () => {
                   }}
 
                   transition={{
-                    delay: 0.8
+                    delay: isMobile ? 0.1 : 0.7
                   }}
 
                   viewport={{ once: true }}
@@ -877,7 +908,7 @@ const App = () => {
                         scale: 1
                       }}
 
-                      transition={{ delay: 0.9 }}
+                      transition={{ delay: isMobile ? 0.1 : 0.8 }}
                       viewport={{ once: true }}
                       className={`step_num ${theme === "dark" && 'darkmode_secondary'}`}>04</motion.div>
                   </div>
@@ -900,12 +931,12 @@ const App = () => {
                 }}
 
                 initial={{
-                  x: 250,
+                  x: isMobile ? 150 : 250,
                   opacity: 0
                 }}
 
                 transition={{
-                  delay: 0.2,
+                  delay: isMobile ? 0.1 : 0.2,
                   stiffness: 100,
                   type: 'spring'
                 }}
@@ -920,14 +951,14 @@ const App = () => {
                 faqContent[lang].map((el, idx) => (
                   <motion.div key={idx}
                     initial={{
-                      x: 350,
+                      x: isMobile ? 200 : 350,
                       opacity: 0
                     }}
 
                     transition={{
                       stiffness: 100,
                       type: 'spring',
-                      delay: (idx + 1) * 0.1
+                      delay: isMobile ? (idx + 1) * 0.05 : (idx + 1) * 0.1
                     }}
 
                     whileInView={{
@@ -955,12 +986,12 @@ const App = () => {
                 }}
 
                 initial={{
-                  x: 250,
+                  x: isMobile ? 150 : 250,
                   opacity: 0
                 }}
 
                 transition={{
-                  delay: 0.2,
+                  delay: isMobile ? 0.1 : 0.2,
                   stiffness: 100,
                   type: 'spring'
                 }}
@@ -975,7 +1006,7 @@ const App = () => {
               <div className="col-lg-3 col-md-6">
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 120 : 200,
                     opacity: 0
                   }}
 
@@ -1004,7 +1035,7 @@ const App = () => {
               <div className="col-lg-3 col-md-6">
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 120 : 200,
                     opacity: 0
                   }}
 
@@ -1033,7 +1064,7 @@ const App = () => {
               <div className="col-lg-3 col-md-6">
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 120 : 200,
                     opacity: 0
                   }}
 
@@ -1062,7 +1093,7 @@ const App = () => {
               <div className="col-lg-3 col-md-6">
                 <motion.div
                   initial={{
-                    y: 200,
+                    y: isMobile ? 120 : 200,
                     opacity: 0
                   }}
 
@@ -1090,7 +1121,7 @@ const App = () => {
 
             <motion.div
               initial={{
-                y: 250,
+                y: isMobile ? 150 : 250,
                 opacity: 0
               }}
 
@@ -1114,29 +1145,36 @@ const App = () => {
                 </div>
                 <div className="col-lg-6">
                   <div className="cf_right">
-                    <form>
+                    <form ref={form} onSubmit={handleSubmit}>
                       <div className="inputs">
                         <div className="input_container">
-                          <label htmlFor="name">{languages[lang].contact_form.names}</label>
+                          <label htmlFor="user_name">{languages[lang].contact_form.names}</label>
                           <input
                             className={isClick && !validation.name.trim().length == 0 ? `input_error` : ``}
-                            type="text" name="name" onChange={(e) => setInputs({ ...inputs, name: e.target.value })} />
+                            type="text" name="user_name" onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
+                            value={inputs.name}
+                          />
                           <h6 className="validation_error">{isClick && validation.name}</h6>
                         </div>
                         <div className="input_container">
-                          <label htmlFor="email">Email</label>
+                          <label htmlFor="user_email">Email</label>
                           <input
                             className={isClick && !validation.email.trim().length == 0 ? `input_error` : ``}
-                            type="email" name="email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })} />
+                            type="email" name="user_email" onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+                            value={inputs.email}
+                          />
                           <h6 className="validation_error">{isClick && validation.email}</h6>
                         </div>
                       </div>
 
                       <textarea
+                        name="message"
                         className={isClick && !validation.desc.trim().length == 0 ? `input_error` : ``}
-                        cols="30" rows="8" placeholder={languages[lang].contact_form.placeholder} onChange={(e) => setInputs({ ...inputs, desc: e.target.value })}></textarea>
+                        cols="30" rows="8" placeholder={languages[lang].contact_form.placeholder} onChange={(e) => setInputs({ ...inputs, desc: e.target.value })}
+                        value={inputs.desc}
+                      />
                       <h6 className="validation_error mbottom">{isClick && validation.desc}</h6>
-                      <button onClick={handleSubmit} type="submit">{languages[lang].contact_form.send}</button>
+                      <button type="submit">{languages[lang].contact_form.send}</button>
                     </form>
                   </div>
                 </div>
@@ -1148,7 +1186,7 @@ const App = () => {
 
       </main>
 
-      <footer className={theme === 'dark' && 'darkmode_primary'}>
+      <footer className={theme === 'dark' ? 'darkmode_primary' : undefined}>
         <div className="container">
           <div className="row g-5">
             <div className="col-lg-3 image">
@@ -1194,7 +1232,7 @@ const App = () => {
       </footer>
       <motion.div
         animate={{
-          x: showGoUp ? 0 : 150,
+          x: showGoUp ? 0 : (isMobile ? 80 : 150),
           opacity: showGoUp ? 1 : 0
         }}
 
@@ -1213,10 +1251,15 @@ const App = () => {
           scale: isAnimate ? 0.8 : 1
         }}
         className="custom_mouse"
-        style={{ left: (parseInt(mousePositions.x) - 12), top: (parseInt(mousePositions.y) - 12) }}
+        style={{
+          left: (parseInt(mousePositions.x) - 12),
+          top: (parseInt(mousePositions.y) - 12)
+        }}
       >
         <img src="/assets/rubber-duck.png" alt="" />
       </motion.div>
+
+      <ToastContainer />
     </>
 
   )
