@@ -14,6 +14,8 @@ import ig from "/assets/ig.png";
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LuMenu } from 'react-icons/lu';
+import { IoMdClose } from 'react-icons/io';
 
 const App = () => {
   const [lang, setLang] = useState(0);
@@ -25,6 +27,7 @@ const App = () => {
   const serviceSection = useRef();
   const contactSection = useRef();
   const homeSection = useRef();
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -122,7 +125,6 @@ const App = () => {
   }, [inputs, lang])
 
   useEffect(() => {
-    console.log(isMobile)
     if (localStorage.getItem('theme')) {
       setTheme(localStorage.getItem('theme'))
     }
@@ -142,19 +144,19 @@ const App = () => {
         setShowGoUp(false)
       }
 
-      if (window.scrollY >= aboutTop && window.scrollY < aboutBottom) {
+      if (window.scrollY >= aboutTop - 30 && window.scrollY < aboutBottom - 30) {
         setActiveLink('about')
       }
-      else if (window.scrollY >= serviceTop && window.scrollY < serviceBottom) {
+      else if (window.scrollY >= serviceTop - 30 && window.scrollY < serviceBottom - 30) {
         setActiveLink('services')
       }
-      else if (window.scrollY >= faqTop && window.scrollY < faqBottom) {
+      else if (window.scrollY >= faqTop - 30 && window.scrollY < faqBottom - 30) {
         setActiveLink('faq')
       }
-      else if (window.scrollY >= contactTop && window.scrollY < contactBottom) {
+      else if (window.scrollY >= contactTop - 30 && window.scrollY < contactBottom - 30) {
         setActiveLink('contact')
       }
-      else if (window.scrollY >= 0 && window.scrollY < homeBottom) {
+      else if (window.scrollY >= 0 && window.scrollY < homeBottom - 30) {
         setActiveLink('home')
       }
     });
@@ -263,6 +265,8 @@ const App = () => {
                 )
               }
             </div>
+
+            <LuMenu className="burger_icon" onClick={() => setToggleMenu(true)} />
           </div>
         </div>
       </nav>
@@ -1029,7 +1033,7 @@ const App = () => {
                     <img src="/assets/tel.png" alt="" />
                   </div>
                   <h3>{languages[lang].phone}</h3>
-                  <a href="">+994 50 000 00 00</a>
+                  <h5>+994 55 403 50 69</h5>
                   <div className="overlay ovr_yellow"></div>
                 </motion.div>
               </div>
@@ -1058,7 +1062,7 @@ const App = () => {
                     <img src="/assets/vp.png" alt="" />
                   </div>
                   <h3>Whatsapp</h3>
-                  <a href="">+994 50 000 00 00</a>
+                  <a href="https://wa.me/+994554035069">+994 55 403 50 69</a>
                   <div className="overlay ovr_green"></div>
                 </motion.div>
               </div>
@@ -1265,6 +1269,94 @@ const App = () => {
       </motion.div>
 
       <ToastContainer />
+
+      <motion.div className="mobile_menu"
+        animate={{
+          x: toggleMenu ? 0 : '-101%',
+          opacity: toggleMenu ? 1 : 0
+        }}
+
+        transition={{
+          type: 'just'
+        }}
+      >
+
+        <div className="nav_actions">
+          <div className="lang" onClick={() => setToggleModal((prev) => !prev)}>
+            <div className="selected_lang" >
+              <span>{selectedLang}</span>
+              <motion.svg animate={{ rotate: toggleModal ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+                <path d="M6.30669 9.24946L0.311688 2.39696C-0.395811 1.59071 0.179188 0.324463 1.25294 0.324463H13.2429C13.4832 0.324257 13.7185 0.393323 13.9206 0.523389C14.1226 0.653455 14.2829 0.839009 14.3822 1.05783C14.4816 1.27665 14.5157 1.51946 14.4806 1.75718C14.4455 1.99491 14.3426 2.21747 14.1842 2.39821L8.18919 9.24821C8.07186 9.38247 7.92717 9.49008 7.76483 9.56381C7.60248 9.63754 7.42624 9.67569 7.24794 9.67569C7.06964 9.67569 6.8934 9.63754 6.73105 9.56381C6.56871 9.49008 6.42402 9.38247 6.30669 9.24821V9.24946Z" fill="#FAFAFA" />
+              </motion.svg>
+            </div>
+            {
+              toggleModal &&
+              <motion.div animate={{ y: 0, opacity: 1 }} initial={{ opacity: 0, y: 20 }} className="lang_options">
+                <div className="option" style={{ backgroundColor: lang === 0 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('AZE'); setLang(0) }}>AZE</div>
+                <div className="option" style={{ backgroundColor: lang === 1 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('ENG'); setLang(1) }}>ENG</div>
+                <div className="option" style={{ backgroundColor: lang === 2 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('RUS'); setLang(2) }}>RUS</div>
+              </motion.div>
+            }
+          </div>
+
+          <div className="theme" onClick={changeTheme}>
+
+            {
+              theme === 'light' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                  <path d="M5.84172 2.69565C5.84172 9.30435 11.1895 14.6522 17.7982 14.6522C18.3743 14.6522 18.9395 14.6087 19.4939 14.5326C17.7439 17.2174 14.7222 19 11.2765 19C5.87433 19 1.4939 14.6196 1.4939 9.21739C1.4939 5.77174 3.27651 2.75 5.96129 1C5.8852 1.55435 5.84172 2.11957 5.84172 2.69565Z" stroke="#FEFEFE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <path d="M10.994 1.5V3.875M17.7116 4.28244L16.0322 5.96183M20.494 11H18.119M17.7116 17.7176L16.0322 16.0382M10.994 18.125V20.5M5.95585 16.0382L4.27646 17.7176M3.86902 11H1.49402M5.95585 5.96183L4.27646 4.28244M14.9524 11C14.9524 12.0498 14.5353 13.0566 13.793 13.799C13.0507 14.5413 12.0438 14.9583 10.994 14.9583C9.9442 14.9583 8.93739 14.5413 8.19505 13.799C7.45272 13.0566 7.03569 12.0498 7.03569 11C7.03569 9.95018 7.45272 8.94337 8.19505 8.20104C8.93739 7.4587 9.9442 7.04167 10.994 7.04167C12.0438 7.04167 13.0507 7.4587 13.793 8.20104C14.5353 8.94337 14.9524 9.95018 14.9524 11Z" stroke="#FFD002" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )
+            }
+          </div>
+
+        </div>
+        <ul>
+          <li>
+            <a href="#"
+              onClick={() => { setActiveLink('home'); setToggleMenu(false) }}
+              style={{ color: handleLinkColor('home') }}
+            >{languages[lang].home}</a>
+          </li>
+          <li>
+            <a href="#about"
+              onClick={() => { setActiveLink('about'); setToggleMenu(false) }}
+              style={{ color: handleLinkColor('about') }}
+            >{languages[lang].about}</a>
+          </li>
+          <li>
+            <a href="#services"
+              onClick={() => { setActiveLink('services'); setToggleMenu(false) }}
+              style={{ color: handleLinkColor('services') }}
+            >{languages[lang].service}</a>
+          </li>
+          <li>
+            <a href="#faq"
+              onClick={() => { setActiveLink('faq'); setToggleMenu(false) }}
+              style={{ color: handleLinkColor('faq') }}
+            >{languages[lang].faq}</a>
+
+          </li>
+          <li>
+            <a href="#contact"
+              onClick={() => { setActiveLink('contact'); setToggleMenu(false) }}
+              style={{ color: handleLinkColor('contact') }}
+            >{languages[lang].contact}</a>
+          </li>
+        </ul>
+
+        <div className="close_btn" onClick={() => setToggleMenu(false)}>
+          <IoMdClose />
+        </div>
+      </motion.div>
+
+      {
+        toggleMenu && <div onClick={() => setToggleMenu(false)} className="entire_overlay"></div>
+      }
     </>
 
   )
