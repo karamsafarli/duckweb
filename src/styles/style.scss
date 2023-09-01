@@ -147,8 +147,11 @@ body {
         .burger_icon {
             color: #FFFFFF !important;
             font-size: 25px;
-            // stroke: white;
-            // fill: white;
+            display: none;
+
+            @media (max-width: 992px) {
+                display: block;
+            }
         }
     }
 
@@ -1104,6 +1107,14 @@ body {
     z-index: 5000;
     background-color: #0b0b0b;
     padding: 50px 40px;
+    display: none;
+
+    @media (max-width: 992px) {
+        display: block;
+    }
+    @media (max-width: 400px) {
+        width: 80%;
+    }
 
     .nav_actions {
         display: none;

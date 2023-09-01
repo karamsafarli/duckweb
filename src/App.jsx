@@ -144,7 +144,7 @@ const App = () => {
         setShowGoUp(false)
       }
 
-      if (window.scrollY >= aboutTop - 30 && window.scrollY < aboutBottom - 30) {
+      if (window.scrollY >= aboutTop - 60 && window.scrollY < aboutBottom - 60) {
         setActiveLink('about')
       }
       else if (window.scrollY >= serviceTop - 30 && window.scrollY < serviceBottom - 30) {
@@ -156,7 +156,7 @@ const App = () => {
       else if (window.scrollY >= contactTop - 30 && window.scrollY < contactBottom - 30) {
         setActiveLink('contact')
       }
-      else if (window.scrollY >= 0 && window.scrollY < homeBottom - 30) {
+      else if (window.scrollY >= 0 && window.scrollY < homeBottom - 60) {
         setActiveLink('home')
       }
     });
@@ -187,7 +187,6 @@ const App = () => {
   const changeTheme = () => {
     localStorage.setItem('theme', theme == 'light' ? 'dark' : 'light');
     setTheme(localStorage.getItem('theme'));
-    console.log(theme)
   }
 
 
