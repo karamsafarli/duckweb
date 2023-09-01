@@ -13,10 +13,10 @@
         cursor: none !important;
     }
 
-    // &::selection {
-    //     background-color: #262626;
-    //     color: #FFD002;
-    // }
+    &::selection {
+        background-color: black;
+        color: #FFD002;
+    }
 }
 
 body {
@@ -1038,7 +1038,7 @@ body {
 
 .custom_mouse {
     position: fixed;
-    z-index: 3000;
+    z-index: 10000;
     transition: none !important;
     pointer-events: none;
     width: 25px;
@@ -1077,3 +1077,4 @@ body {
 .darknav {
     background-color: #121212 !important;
 }
+

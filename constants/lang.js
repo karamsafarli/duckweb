@@ -118,8 +118,8 @@ export const languages = [
             email1: 'Email qeyd edilməlidir.',
             email2: 'Düzgün email daxil edin.',
             text: 'Mesajınızı qeyd etməmisiniz.'
-        }
-
+        },
+        toastmsg: 'Mesajınız göndərildi!'
     },
     {
         home: 'Home',
@@ -243,8 +243,8 @@ export const languages = [
             email1: 'Email must be specified.',
             email2: 'Please enter a valid email.',
             text: 'You have not saved your message.'
-        }
-
+        },
+        toastmsg: 'Your message has been sent!'
     },
     {
         home: 'Главная ',
@@ -367,7 +367,8 @@ export const languages = [
             email1: 'Введите электронной почты.',
             email2: 'Введите, пожалуйста, действительный адрес электронной почты.',
             text: 'Вы не сохранили свое сообщение.'
-        }
+        },
+        toastmsg: 'Cообщение было отправлено!'
     },
 
 ]

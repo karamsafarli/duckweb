@@ -51,6 +51,8 @@ const App = () => {
     x: ''
   });
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleLinkColor = (active) => {
@@ -65,12 +67,13 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsDisabled(true);
 
     if (!isError) {
       emailjs.sendForm(serviceID, templateID, form.current, apiKey)
-        .then(() => setInputs({ name: '', email: '', desc: '' }));
-      toast("Sent successfully");
+        .then(() => setInputs({ name: '', email: '', desc: '' }))
+        .finally(() => setIsDisabled(false));
+      toast(languages[lang].toastmsg);
       setIsClick(false);
     } else {
       setIsClick(true);
@@ -1174,7 +1177,9 @@ const App = () => {
                         value={inputs.desc}
                       />
                       <h6 className="validation_error mbottom">{isClick && validation.desc}</h6>
-                      <button type="submit">{languages[lang].contact_form.send}</button>
+                      <button type="submit" disabled={isDisabled}
+                        style={{ opacity: isDisabled ? '0.5' : '1' }}
+                      >{languages[lang].contact_form.send}</button>
                     </form>
                   </div>
                 </div>
