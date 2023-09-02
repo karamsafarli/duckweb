@@ -1269,14 +1269,10 @@ const App = () => {
 
       <ToastContainer />
 
-      <motion.div className="mobile_menu"
-        animate={{
-          x: toggleMenu ? 0 : '-101%',
+      <div className="mobile_menu"
+        style={{
+          transform: toggleMenu ? 'translateX(0)' : 'translate(-101%)',
           opacity: toggleMenu ? 1 : 0
-        }}
-
-        transition={{
-          type: 'just'
         }}
       >
 
@@ -1351,7 +1347,7 @@ const App = () => {
         <div className="close_btn" onClick={() => setToggleMenu(false)}>
           <IoMdClose />
         </div>
-      </motion.div>
+      </div>
 
       {
         toggleMenu && <div onClick={() => setToggleMenu(false)} className="entire_overlay"></div>
