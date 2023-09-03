@@ -119,7 +119,8 @@ export const languages = [
             email2: 'Düzgün email daxil edin.',
             text: 'Mesajınızı qeyd etməmisiniz.'
         },
-        toastmsg: 'Mesajınız göndərildi!'
+        toastmsg: 'Mesajınız göndərildi!',
+        btntxt: 'Göndərildi'
     },
     {
         home: 'Home',
@@ -244,7 +245,8 @@ export const languages = [
             email2: 'Please enter a valid email.',
             text: 'You have not saved your message.'
         },
-        toastmsg: 'Your message has been sent!'
+        toastmsg: 'Your message has been sent!',
+        btntxt: 'Sent'
     },
     {
         home: 'Главная ',
@@ -368,7 +370,8 @@ export const languages = [
             email2: 'Введите, пожалуйста, действительный адрес электронной почты.',
             text: 'Вы не сохранили свое сообщение.'
         },
-        toastmsg: 'Cообщение было отправлено!'
+        toastmsg: 'Cообщение было отправлено!',
+        btntxt: 'Oтправил'
     },
 
 ]
@@ -377,20 +380,20 @@ export const languages = [
 export const faqContent = [
     [
         {
-            duckquestion: 'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiz?',
-            duckanswer: 'Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə ,əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.',
+            duckquestion: 'Veb saytları nə qədər müddətə hazırlayıb təhvil verirsiniz?',
+            duckanswer: 'Veb saytların hazırlanma müddəti müştərinin sifarişindən asılı olaraq dəyişir. Veb saytın növünə, əsasən, müddət 3 həftə, 1 ay və ya bir neçə ay ola bilər. Hər bir halda əsas məqsədimiz müştərilərimizin sifarişlərindən məmnun qalması və  qısa müddətə təhvil verməkdir.',
         },
         {
             duckquestion: 'Veb saytların hazırlanmasının qiyməti neçədir?',
-            duckanswer: 'Qiymətləndirmə prosesi aşağıdakı məsuliyyətlər və faktorlara əsaslanır: Texnologiya və funksiyalar,Dil və ölçü,SEO optimizasiyası,Təhlükəsizlik,Domain və hosting,Təlimat və dəstək.Bunlara əsasən qiymət dəyişə bilir'
+            duckanswer: 'Qiymətləndirmə prosesi aşağıdakı məsuliyyətlər və faktorlara əsaslanır: Texnologiya və funksiyalar, Dil və ölçü, SEO optimizasiyası, Təhlükəsizlik, Domain və hosting, Təlimat və dəstək. Bunlara əsasən qiymət dəyişə bilir'
         },
         {
-            duckquestion: 'Hansı növ SMM xidmətləri verirsiz?',
-            duckanswer: 'Sosial Media İdarəetməsi,İzləmə və Analitika,Çəkilişlər,Reklam Kampaniyaları,Müştəri Əlaqələri'
+            duckquestion: 'Hansı növ SMM xidmətləri verirsiniz?',
+            duckanswer: 'Sosial Media İdarəetməsi, İzləmə və Analitika, Çəkilişlər, Reklam Kampaniyaları, Müştəri Əlaqələri'
         },
         {
             duckquestion: 'Rəqəmsal menyular haqda ətraflı məlumat verə bilərsinizmi?',
-            duckanswer: ' Rəqəmsal menyular restoran və kafe təşkilatlarında istifadə edilən bir texnologiyadır ki, müştərilərə elektron formada yemək siyahısı təqdim edir və onların sifarişlərini tətbiqdən və ya cihazdan etməyə imkan verir.Rəqəmsal menyuların üstünlükləri:İstifadə Asanlığı,Sifarişin Sürətlənməsi,Məlumat Təhlili,Elektron ödəniş '
+            duckanswer: ' Rəqəmsal menyular restoran və kafe təşkilatlarında istifadə edilən bir texnologiyadır ki, müştərilərə elektron formada yemək siyahısı təqdim edir və onların sifarişlərini tətbiqdən və ya cihazdan etməyə imkan verir. Rəqəmsal menyuların üstünlükləri: İstifadə Asanlığı, Sifarişin Sürətlənməsi, Məlumat Təhlili, Elektron ödəniş '
         }
     ],
     [
@@ -404,7 +407,7 @@ export const faqContent = [
         },
         {
             duckquestion: 'What types of SMM services do you provide?',
-            duckanswer: 'Social Media Management,Tracking & Analytics,Shooting,Ad Campaigns,Customer Relations'
+            duckanswer: 'Social Media Management, Tracking & Analytics, Shooting, Ad Campaigns, Customer Relations'
         },
         {
             duckquestion: 'Can you tell us more about the digital menus?',

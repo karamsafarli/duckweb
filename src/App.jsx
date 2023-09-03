@@ -22,6 +22,7 @@ const App = () => {
   const [activeLink, setActiveLink] = useState('home');
   const [selectedLang, setSelectedLang] = useState('AZE');
   const [toggleModal, setToggleModal] = useState(false);
+  const [toggleModalMobile, setToggleModalMobile] = useState(false);
   const aboutSection = useRef();
   const faqSection = useRef();
   const serviceSection = useRef();
@@ -48,6 +49,10 @@ const App = () => {
 
   const [theme, setTheme] = useState('light');
 
+  const langSelect = useRef();
+
+  const langSelect2 = useRef();
+
   const [isClick, setIsClick] = useState(false);
   const [mousePositions, setMousePositions] = useState({
     y: '',
@@ -56,7 +61,7 @@ const App = () => {
 
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, _setIsMobile] = useState(window.innerWidth <= 768);
 
   const handleLinkColor = (active) => {
     if (active === activeLink) {
@@ -70,12 +75,11 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsDisabled(true);
 
     if (!isError) {
+      setIsDisabled(true);
       emailjs.sendForm(serviceID, templateID, form.current, apiKey)
-        .then(() => setInputs({ name: '', email: '', desc: '' }))
-        .finally(() => setIsDisabled(false));
+        .then(() => setInputs({ name: '', email: '', desc: '' }));
       toast(languages[lang].toastmsg);
       setIsClick(false);
     } else {
@@ -160,29 +164,50 @@ const App = () => {
         setActiveLink('home')
       }
     });
-    window.addEventListener('mousemove', (e) => {
+
+
+    const handleMouseMove = (e) => {
       setMousePositions({
         ...mousePositions,
         y: e.clientY,
         x: e.clientX
-      })
+      });
+    };
 
-      // window.addEventListener('click', () => {
-      //   setIsAnimate(true);
+    const handleMouseDown = () => {
+      setIsAnimate(true);
+    }
 
-      //   setTimeout(() => {
-      //     setIsAnimate(false)
-      //   }, 100)
-      // })
+    const handleMouseUp = () => {
+      setIsAnimate(false);
+    }
 
-    });
+    const handleLangClick = (e) => {
+      if (!langSelect.current.contains(e.target)) {
+        setToggleModal(false);
+      }
+
+      if (!langSelect2.current.contains(e.target)) {
+        setToggleModalMobile(false);
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    window.addEventListener('mousedown', handleMouseDown);
+
+    window.addEventListener('mouseup', handleMouseUp);
+
+    window.addEventListener('click', handleLangClick);
 
     return () => {
-      window.removeEventListener('mousemove');
-      // window.removeEventListener('click')
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     }
 
   }, [])
+
 
   const changeTheme = () => {
     localStorage.setItem('theme', theme == 'light' ? 'dark' : 'light');
@@ -233,7 +258,7 @@ const App = () => {
             </ul>
           </div>
           <div className="nav_actions">
-            <div className="lang" onClick={() => setToggleModal((prev) => !prev)}>
+            <div ref={langSelect} className="lang" onClick={() => setToggleModal((prev) => !prev)}>
               <div className="selected_lang" >
                 <span>{selectedLang}</span>
                 <motion.svg animate={{ rotate: toggleModal ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
@@ -439,7 +464,9 @@ const App = () => {
                     viewport={{ once: true }}
                     className="img_cont">
                     <img src="/assets/about_img.png" alt="" />
-                    <div className="border_div"></div>
+                    <div className="border_div">
+                      <img src="/assets/circle_border.png" alt="" />
+                    </div>
                   </motion.div>
 
                 </div>
@@ -1182,7 +1209,12 @@ const App = () => {
                       <h6 className="validation_error mbottom">{isClick && validation.desc}</h6>
                       <button type="submit" disabled={isDisabled}
                         style={{ opacity: isDisabled ? '0.5' : '1' }}
-                      >{languages[lang].contact_form.send}</button>
+                      >
+
+                        {
+                          isDisabled ? languages[lang].btntxt : languages[lang].contact_form.send
+                        }
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -1271,21 +1303,21 @@ const App = () => {
 
       <div className="mobile_menu"
         style={{
-          transform: toggleMenu ? 'translateX(0)' : 'translate(-101%)',
+          transform: toggleMenu ? 'translateX(0)' : 'translate(101%)',
           opacity: toggleMenu ? 1 : 0
         }}
       >
 
         <div className="nav_actions">
-          <div className="lang" onClick={() => setToggleModal((prev) => !prev)}>
+          <div ref={langSelect2} className="lang" onClick={() => setToggleModalMobile((prev) => !prev)}>
             <div className="selected_lang" >
               <span>{selectedLang}</span>
-              <motion.svg animate={{ rotate: toggleModal ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+              <motion.svg animate={{ rotate: toggleModalMobile ? 180 : 0 }} xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
                 <path d="M6.30669 9.24946L0.311688 2.39696C-0.395811 1.59071 0.179188 0.324463 1.25294 0.324463H13.2429C13.4832 0.324257 13.7185 0.393323 13.9206 0.523389C14.1226 0.653455 14.2829 0.839009 14.3822 1.05783C14.4816 1.27665 14.5157 1.51946 14.4806 1.75718C14.4455 1.99491 14.3426 2.21747 14.1842 2.39821L8.18919 9.24821C8.07186 9.38247 7.92717 9.49008 7.76483 9.56381C7.60248 9.63754 7.42624 9.67569 7.24794 9.67569C7.06964 9.67569 6.8934 9.63754 6.73105 9.56381C6.56871 9.49008 6.42402 9.38247 6.30669 9.24821V9.24946Z" fill="#FAFAFA" />
               </motion.svg>
             </div>
             {
-              toggleModal &&
+              toggleModalMobile &&
               <motion.div animate={{ y: 0, opacity: 1 }} initial={{ opacity: 0, y: 20 }} className="lang_options">
                 <div className="option" style={{ backgroundColor: lang === 0 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('AZE'); setLang(0) }}>AZE</div>
                 <div className="option" style={{ backgroundColor: lang === 1 ? 'rgba(38, 38, 38, 0.10)' : '#fff' }} onClick={() => { setSelectedLang('ENG'); setLang(1) }}>ENG</div>
