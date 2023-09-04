@@ -2,6 +2,7 @@ export const languages = [
     {
         home: 'Ana Səhifə',
         about: 'Haqqımızda',
+        suallar: 'Tez-tez verilən suallar',
         service: 'Xidmətlər',
         faq: 'FAQ',
         contact: 'Əlaqə',
@@ -125,6 +126,7 @@ export const languages = [
     {
         home: 'Home',
         about: 'About us',
+        suallar: 'Frequently asked questions',
         service: 'Services',
         faq: 'FAQ',
         contact: 'Contact us',
@@ -252,6 +254,7 @@ export const languages = [
         home: 'Главная ',
         about: 'О нас',
         service: 'Yслуги',
+        suallar: 'Часто задаваемые вопросы',
         faq: 'Частые вопросы',
         contact: 'Связаться с нами',
         main: 'Доверьте свою работу нам',

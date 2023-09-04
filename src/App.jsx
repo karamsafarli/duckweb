@@ -279,9 +279,12 @@ const App = () => {
 
               {
                 theme === 'light' ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-                    <path d="M5.84172 2.69565C5.84172 9.30435 11.1895 14.6522 17.7982 14.6522C18.3743 14.6522 18.9395 14.6087 19.4939 14.5326C17.7439 17.2174 14.7222 19 11.2765 19C5.87433 19 1.4939 14.6196 1.4939 9.21739C1.4939 5.77174 3.27651 2.75 5.96129 1C5.8852 1.55435 5.84172 2.11957 5.84172 2.69565Z" stroke="#FEFEFE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9165 4.35229L16 2.67367L13.3729 2.5958L12.5 0L11.6271 2.5958L9 2.67367L11.0835 4.35229L10.3341 7L12.5 5.43387L14.6659 7L13.9165 4.35229Z" fill="#FEFEFE" />
+                    <path d="M19.0091 11.1071L20.5 9.91205L18.6273 9.86424L18 8L17.3727 9.86424L15.5 9.91205L16.9909 11.1071L16.4545 13L18 11.8815L19.5455 13L19.0091 11.1071Z" fill="#FEFEFE" />
+                    <path d="M5.34783 3.69565C5.34783 10.3043 10.6957 15.6522 17.3043 15.6522C17.8804 15.6522 18.4457 15.6087 19 15.5326C17.25 18.2174 14.2283 20 10.7826 20C5.38043 20 1 15.6196 1 10.2174C1 6.77174 2.78261 3.75 5.46739 2C5.3913 2.55435 5.34783 3.11957 5.34783 3.69565Z" stroke="#FEFEFE" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
+
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                     <path d="M10.994 1.5V3.875M17.7116 4.28244L16.0322 5.96183M20.494 11H18.119M17.7116 17.7176L16.0322 16.0382M10.994 18.125V20.5M5.95585 16.0382L4.27646 17.7176M3.86902 11H1.49402M5.95585 5.96183L4.27646 4.28244M14.9524 11C14.9524 12.0498 14.5353 13.0566 13.793 13.799C13.0507 14.5413 12.0438 14.9583 10.994 14.9583C9.9442 14.9583 8.93739 14.5413 8.19505 13.799C7.45272 13.0566 7.03569 12.0498 7.03569 11C7.03569 9.95018 7.45272 8.94337 8.19505 8.20104C8.93739 7.4587 9.9442 7.04167 10.994 7.04167C12.0438 7.04167 13.0507 7.4587 13.793 8.20104C14.5353 8.94337 14.9524 9.95018 14.9524 11Z" stroke="#FFD002" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -974,7 +977,7 @@ const App = () => {
                   type: 'spring'
                 }}
                 viewport={{ once: true }}
-              >Tez-tez verilən suallar
+              > {languages[lang].suallar}
                 <div className="bottom_line"></div>
               </motion.h2>
             </div>
@@ -1229,7 +1232,7 @@ const App = () => {
       <footer className={theme === 'dark' ? 'darkmode_primary' : undefined}>
         <div className="container">
           <div className="row g-5">
-            <div className="col-lg-3 image">
+            <div className="col-lg-2 image">
               <h2>Logo</h2>
             </div>
             <div className="col-lg-3 text">
@@ -1257,11 +1260,11 @@ const App = () => {
               }
 
             </div>
-            <div className="col-lg-2 icons">
+            <div className="col-lg-3 icons">
               <p>{languages[lang].footerthree.title}</p>
               <div className="iconss">
-                <img src={wp} alt="" />
-                <img src={ig} alt="" />
+                <img src='/assets/vp.png' alt="" />
+                <img src='/assets/insta_footer.png' className="insta_icon" alt="" />
               </div>
             </div>
           </div>
