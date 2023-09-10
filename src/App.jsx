@@ -220,7 +220,7 @@ const App = () => {
       <nav className={theme === 'dark' ? 'darknav' : undefined}>
         <div className="container">
           <div className="logo">
-            <a href="#">Logo</a>
+            <a href="#"> <img src="/assets/webducklogo.svg" alt="" /></a>
           </div>
           <div className="nav_links">
             <ul>
@@ -1091,7 +1091,7 @@ const App = () => {
                     <img src="/assets/vp.png" alt="" />
                   </div>
                   <h3>Whatsapp</h3>
-                  <a href="https://wa.me/+994554035069">+994 55 403 50 69</a>
+                  <a href="https://wa.me/+994554035069" target="_blank" rel="noreferrer">+994 55 403 50 69</a>
                   <div className="overlay ovr_green"></div>
                 </motion.div>
               </div>
@@ -1120,8 +1120,8 @@ const App = () => {
                     <img src="/assets/email.png" alt="" />
                   </div>
                   <h3>Email</h3>
-                  <a href="">Helloduckweb@gmail.com</a>
-                  <div className="overlay ovr_yellow"></div>
+                  <a href="mailto:duckweb.info@gmail.com" target="_blank" rel="noreferrer">duckweb.info@gmail.com</a>
+                  <div className="overlay ovr_blue"></div>
                 </motion.div>
               </div>
 
@@ -1145,12 +1145,12 @@ const App = () => {
 
                   viewport={{ once: true }}
                   className={`contact_card ${theme === 'dark' && 'darkmode_secondary'}`}>
-                  <div className="imgcont">
-                    <img src="/assets/insta.png" alt="" />
-                  </div>
-                  <h3>Instagram</h3>
-                  <a href="">@duckweb</a>
-                  <div className="overlay ovr_gradient"></div>
+                    <div className="imgcont">
+                      <img src="/assets/insta.png" alt="" />
+                    </div>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/duckweb.az/" target="_blank" rel="noreferrer">@duckweb.az</a>
+                    <div className="overlay ovr_gradient"></div>
                 </motion.div>
               </div>
             </div>
@@ -1231,9 +1231,9 @@ const App = () => {
 
       <footer className={theme === 'dark' ? 'darkmode_primary' : undefined}>
         <div className="container">
-          <div className="row g-5">
-            <div className="col-lg-2 image">
-              <h2>Logo</h2>
+          <div className="row g-4">
+            <div className="col-lg-3 image">
+              <a href="#"><img src="/assets/webducklogo.svg" alt="" /></a>
             </div>
             <div className="col-lg-3 text">
               <p>{languages[lang].footerone.title}</p>
@@ -1260,11 +1260,11 @@ const App = () => {
               }
 
             </div>
-            <div className="col-lg-3 icons">
+            <div className="col-lg-2 icons">
               <p>{languages[lang].footerthree.title}</p>
               <div className="iconss">
-                <img src='/assets/vp.png' alt="" />
-                <img src='/assets/insta_footer.png' className="insta_icon" alt="" />
+                <a href="https://wa.me/+994554035069" target="_blank" rel="noreferrer"><img src='/assets/vp.png' alt="" /></a>
+                <a href="https://www.instagram.com/duckweb.az/" target="_blank" rel="noreferrer"><img src='/assets/insta_footer.png' className="insta_icon" alt="" /></a>
               </div>
             </div>
           </div>
