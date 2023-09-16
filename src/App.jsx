@@ -9,8 +9,6 @@ import { motion } from 'framer-motion';
 import { languages } from "../constants/lang";
 import FaqComponent from "../components/FAQ/FaqComponent";
 import { faqContent } from "../constants/lang";
-import wp from "/assets/wp.png";
-import ig from "/assets/ig.png";
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
